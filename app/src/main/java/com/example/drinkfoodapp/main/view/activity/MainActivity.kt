@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setUpView() {
-        // Dùng apply để tránh lặp bidning
+        // Dùng apply để tránh lặp binding
         binding.apply {
             // Thiết lập Adapter
             val adapter = ViewPagerAdapter(this@MainActivity)

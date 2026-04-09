@@ -10,11 +10,9 @@
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#F8F9FA"
+        android:background="#F2F2ED"
         app:elevation="0dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/topAppBar"
@@ -22,8 +20,8 @@
             android:layout_height="?attr/actionBarSize"
             app:title="Hôm nay ăn gì?"
             app:titleCentered="true"
-            app:titleTextColor="#2C3539" />
-
+            app:titleTextColor="#2C3539"
+            app:menu="@menu/top_app_bar_menu" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.viewpager2.widget.ViewPager2
