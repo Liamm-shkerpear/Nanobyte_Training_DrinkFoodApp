@@ -7,18 +7,18 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.drinkfoodapp.databinding.FragmentItemBinding
+import com.example.drinkfoodapp.main.model.MenuItem
 import com.example.drinkfoodapp.main.viewmodel.MainViewModel
 
+/**
+ * Fragment responsible for displaying either a drink or food item with animation.
+ */
 class ItemFragment : Fragment() {
 
-    private val viewModel: MainViewModel by activityViewModels()
-
-    // Khởi tạo View Binding an toàn cho Fragment
-    private var _binding: FragmentItemBinding? = null
-    private val binding get() = _binding!!
-
+    // Companion object đặt ở đầu
     companion object {
         private const val ARG_IS_DRINK = "is_drink"
+        private const val ANIMATION_DURATION = 150L
 
         fun newInstance(isDrink: Boolean): ItemFragment {
             val fragment = ItemFragment()
@@ -28,6 +28,13 @@ class ItemFragment : Fragment() {
             return fragment
         }
     }
+
+    private val viewModel: MainViewModel by activityViewModels()
+
+    // Khởi tạo View Binding
+    private var _binding: FragmentItemBinding? = null
+    private val binding get() = _binding!!
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,17 +51,13 @@ class ItemFragment : Fragment() {
 
         // Quan sát LiveData và cập nhật giao diện
         if (isDrink) {
-            viewModel.currentDrink.observe(viewLifecycleOwner) { menuItem ->
-//                binding.tvItemName.text = menuItem.name
-//                binding.ivItemImage.setImageResource(menuItem.imageResId)
-                animateAndChangeData(menuItem)
+            viewModel.currentDrink.observe(viewLifecycleOwner) {
+                animateAndChangeData(it)  // Dùng it thay cho menuItem để cho gọn
 
             }
         } else {
-            viewModel.currentFood.observe(viewLifecycleOwner) { menuItem ->
-//                binding.tvItemName.text = menuItem.name
-//                binding.ivItemImage.setImageResource(menuItem.imageResId)
-                animateAndChangeData(menuItem)
+            viewModel.currentFood.observe(viewLifecycleOwner) {
+                animateAndChangeData(it)
             }
         }
 
@@ -64,25 +67,27 @@ class ItemFragment : Fragment() {
         }
     }
 
-    private fun animateAndChangeData(menuItem: com.example.drinkfoodapp.main.model.MenuItem) {
-        // BƯỚC 1: Cho mờ đi (alpha = 0) và thu nhỏ lại (scale = 0.8) trong 150 milliseconds
-        binding.ivItemImage.animate().alpha(0f).scaleX(0.8f).scaleY(0.8f).setDuration(150L).start()
-        binding.tvItemName.animate().alpha(0f).scaleX(0.8f).scaleY(0.8f).setDuration(150L)
-            .withEndAction {
+    private fun animateAndChangeData(menuItem: MenuItem) {
+        // Dùng scope function (apply) để tránh lặp lại binding nhiều lần -> DRY
+        binding.apply {
+            // BƯỚC 1: Cho mờ đi (alpha = 0) và thu nhỏ lại (scale = 0.8) trong 150 milliseconds
+            ivItemImage.animate().alpha(0f).scaleX(0.8f).scaleY(0.8f).setDuration(ANIMATION_DURATION).start()
+            tvItemName.animate().alpha(0f).scaleX(0.8f).scaleY(0.8f).setDuration(ANIMATION_DURATION)
+                .withEndAction {
 
-                // BƯỚC 2: Khi hiệu ứng mờ kết thúc (withEndAction), ta tiến hành thay đổi Data
-                binding.ivItemImage.setImageResource(menuItem.imageResId)
-                binding.tvItemName.text = menuItem.name
+                    // BƯỚC 2: Khi hiệu ứng mờ kết thúc (withEndAction), ta tiến hành thay đổi Data
+                    ivItemImage.setImageResource(menuItem.imageResId)
+                    tvItemName.text = menuItem.name
 
-                // BƯỚC 3: Thay data xong, cho hiện rõ lại (alpha = 1) và kích thước bình thường (scale = 1)
-                binding.ivItemImage.animate().alpha(1f).scaleX(1f).scaleY(1f).setDuration(150L)
-                    .start()
-                binding.tvItemName.animate().alpha(1f).scaleX(1f).scaleY(1f).setDuration(150L)
-                    .start()
+                    // BƯỚC 3: Thay data xong, cho hiện rõ lại (alpha = 1) và kích thước bình thường (scale = 1)
+                    ivItemImage.animate().alpha(1f).scaleX(1f).scaleY(1f).setDuration(ANIMATION_DURATION)
+                        .start()
+                    tvItemName.animate().alpha(1f).scaleX(1f).scaleY(1f).setDuration(ANIMATION_DURATION)
+                        .start()
 
-            }.start()
+                }.start()
+        }
     }
-
 
         override fun onDestroyView() {
             super.onDestroyView()

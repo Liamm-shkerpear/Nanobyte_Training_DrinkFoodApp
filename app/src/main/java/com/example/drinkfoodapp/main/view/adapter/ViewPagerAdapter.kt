@@ -5,7 +5,10 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.drinkfoodapp.main.view.fragment.ItemFragment
 
-class ViewPagerAdapter(activity: AppCompatActivity) : FragmentStateAdapter(activity) {
+/**
+ * Adapter for managing fragments in the main ViewPager (Drink and Food tabs).
+ */
+class ViewPagerAdapter(activity : AppCompatActivity) : FragmentStateAdapter(activity) {
 
     override fun getItemCount(): Int = 2
 

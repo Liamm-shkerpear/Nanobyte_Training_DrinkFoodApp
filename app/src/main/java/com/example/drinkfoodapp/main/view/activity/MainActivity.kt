@@ -9,9 +9,15 @@ import com.example.drinkfoodapp.main.viewmodel.MainViewModel
 import androidx.viewpager2.widget.ViewPager2
 import com.example.drinkfoodapp.R
 
+/**
+ * Main Activity that hosts the ViewPager and Bottom Navigation for Drink and Food categories.
+ */
 class MainActivity : AppCompatActivity() {
 
-    // Khởi tạo ViewModel
+    companion object {
+        private const val TAB_DRINK_POSITION = 0
+        private const val TAB_FOOD_POSITION = 1
+    }
     private val viewModel: MainViewModel by viewModels()
 
     // Khởi tạo View Binding
@@ -23,41 +29,54 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Thiết lập Adapter
-        val adapter = ViewPagerAdapter(this)
-        binding.viewPager.adapter = adapter
+        setUpView()
+    }
 
-        // Kết nối BottomNav và ViewPager2
-        binding.bottomNav.setOnItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.nav_drink -> binding.viewPager.currentItem = 0
-                R.id.nav_food -> binding.viewPager.currentItem = 1
+    private fun setUpView() {
+        // Dùng apply để tránh lặp bidning
+        binding.apply {
+            // Thiết lập Adapter
+            val adapter = ViewPagerAdapter(this@MainActivity)
+            viewPager.adapter = adapter
+
+            // Kết nối BottomNav và ViewPager2
+            bottomNav.setOnItemSelectedListener { item ->
+                val position = when (item.itemId) {
+                    R.id.nav_drink -> TAB_DRINK_POSITION
+                    R.id.nav_food -> TAB_FOOD_POSITION
+                    else -> return@setOnItemSelectedListener false
+                }
+                viewPager.setCurrentItem(position, true)
+                true
             }
-            true
-        }
 
-        binding.viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-            override fun onPageSelected(position: Int) {
-                super.onPageSelected(position)
-                binding.bottomNav.menu.getItem(position).isChecked = true
+            viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+                override fun onPageSelected(position: Int) {
+                    super.onPageSelected(position)
+                    bottomNav.menu.getItem(position).isChecked = true
+
+                    // random khi chuyển tab
+                    val isDrinkSelected = position == TAB_DRINK_POSITION
+                    viewModel.randomizeSingleItem(isDrinkSelected)
+                }
+            })
+
+            // Xử lý sự kiện nút bấm điều hướng
+            btnNext.setOnClickListener {
+                val isDrinkSelected = viewPager.currentItem == TAB_DRINK_POSITION
+                viewModel.nextItem(isDrinkSelected)
             }
-        })
 
-        // Xử lý sự kiện nút bấm điều hướng
-        binding.btnNext.setOnClickListener {
-            val isDrinkSelected = binding.viewPager.currentItem == 0
-            viewModel.nextItem(isDrinkSelected)
-        }
-
-        binding.btnPrevious.setOnClickListener {
-            val isDrinkSelected = binding.viewPager.currentItem == 0
-            viewModel.previousItem(isDrinkSelected)
+            btnPrevious.setOnClickListener {
+                val isDrinkSelected = viewPager.currentItem == TAB_DRINK_POSITION
+                viewModel.previousItem(isDrinkSelected)
+            }
         }
     }
 
     override fun onResume() {
         super.onResume()
-        // Kích hoạt random món ăn/đồ uống khi mở app lên
+        // Random món ăn/đồ uống khi mở app lên
         viewModel.randomizeItems()
     }
 }
