@@ -2,10 +2,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/nav_drink"
-        android:icon="@android:drawable/ic_menu_gallery"
+        android:icon="@drawable/coffee_24"
         android:title="Thức uống" />
     <item
         android:id="@+id/nav_food"
-        android:icon="@android:drawable/ic_menu_compass"
+        android:icon="@drawable/meal_24"
         android:title="Đồ ăn" />
 </menu>

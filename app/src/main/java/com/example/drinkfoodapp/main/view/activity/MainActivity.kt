@@ -1,12 +1,11 @@
-package com.example.drinkfoodapp.ui.view.activity
+package com.example.drinkfoodapp.main.view.activity
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.drinkfoodapp.databinding.ActivityMainBinding
-import com.example.drinkfoodapp.ui.view.adapter.ViewPagerAdapter
-import com.example.drinkfoodapp.ui.viewmodel.MainViewModel
+import com.example.drinkfoodapp.main.view.adapter.ViewPagerAdapter
+import com.example.drinkfoodapp.main.viewmodel.MainViewModel
 import androidx.viewpager2.widget.ViewPager2
 import com.example.drinkfoodapp.R
 
