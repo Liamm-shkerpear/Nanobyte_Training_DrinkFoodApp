@@ -3,6 +3,7 @@ package com.example.drinkfoodapp.main.view.activity
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.WindowInsetsControllerCompat
 import com.example.drinkfoodapp.databinding.ActivityMainBinding
 import com.example.drinkfoodapp.main.view.adapter.ViewPagerAdapter
 import com.example.drinkfoodapp.main.viewmodel.MainViewModel
@@ -28,6 +29,9 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // Set status bar icons to dark
+        WindowInsetsControllerCompat(window, window.decorView).isAppearanceLightStatusBars = true
 
         setUpView()
     }

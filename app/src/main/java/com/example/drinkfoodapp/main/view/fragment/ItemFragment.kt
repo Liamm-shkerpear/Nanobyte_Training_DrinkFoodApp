@@ -53,7 +53,6 @@ class ItemFragment : Fragment() {
         if (isDrink) {
             viewModel.currentDrink.observe(viewLifecycleOwner) {
                 animateAndChangeData(it)  // Dùng it thay cho menuItem để cho gọn
-
             }
         } else {
             viewModel.currentFood.observe(viewLifecycleOwner) {

@@ -24,13 +24,14 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="16dp"> <com.google.android.material.imageview.ShapeableImageView
+            android:padding="16dp">
+            <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/ivItemImage"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_constraintHeight_percent="0.45" app:layout_constraintDimensionRatio="1:1" app:layout_constraintWidth_max="220dp" app:layout_constraintHeight_max="220dp"
             android:scaleType="centerCrop"
-            android:elevation="4dp"
+            android:elevation="8dp"
             app:shapeAppearanceOverlay="@style/CornerCut"
             app:layout_constraintVertical_chainStyle="packed"
             app:layout_constraintTop_toTopOf="parent"
