@@ -1,15 +1,12 @@
-package com.example.drinkfoodapp.main.viewmodel
+package com.example.drinkfoodapp.main.ui.mainscreen
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.drinkfoodapp.R
-import kotlin.random.Random
 import com.example.drinkfoodapp.main.model.MenuItem
+import kotlin.random.Random
 
-/**
- * ViewModel managing the state and logic for selecting drink and food items.
- */
 class MainViewModel : ViewModel() {
     private val drinkList = listOf(
         MenuItem("Cà phê đá", R.drawable.ca_fe),
@@ -24,11 +21,9 @@ class MainViewModel : ViewModel() {
         MenuItem("Cơm tấm", R.drawable.com_tam),
         MenuItem("Bún chả", R.drawable.bun_cha),
     )
-    // State Index
     private var currentDrinkIndex = 0
     private var currentFoodIndex = 0
 
-    // LiveData để View quan sát
     private val _currentDrink = MutableLiveData<MenuItem>()
     val currentDrink: LiveData<MenuItem> = _currentDrink
 
@@ -40,16 +35,16 @@ class MainViewModel : ViewModel() {
     }
 
     fun randomizeItems() {
-        currentDrinkIndex = Random.nextInt(drinkList.size)
-        currentFoodIndex = Random.nextInt(foodList.size)
+        currentDrinkIndex = Random.Default.nextInt(drinkList.size)
+        currentFoodIndex = Random.Default.nextInt(foodList.size)
         updateData()
     }
 
     fun randomizeSingleItem(isDrink: Boolean) {
         if (isDrink) {
-            currentDrinkIndex = Random.nextInt(drinkList.size)
+            currentDrinkIndex = Random.Default.nextInt(drinkList.size)
         } else {
-            currentFoodIndex = Random.nextInt(foodList.size)
+            currentFoodIndex = Random.Default.nextInt(foodList.size)
         }
         updateData()
     }

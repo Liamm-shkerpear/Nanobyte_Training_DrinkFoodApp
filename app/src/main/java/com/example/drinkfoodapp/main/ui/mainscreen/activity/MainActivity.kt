@@ -1,27 +1,18 @@
-package com.example.drinkfoodapp.main.view.activity
+package com.example.drinkfoodapp.main.ui.mainscreen.activity
 
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowInsetsControllerCompat
 import com.example.drinkfoodapp.databinding.ActivityMainBinding
-import com.example.drinkfoodapp.main.view.adapter.ViewPagerAdapter
-import com.example.drinkfoodapp.main.viewmodel.MainViewModel
+import com.example.drinkfoodapp.main.ui.mainscreen.adapter.ViewPagerAdapter
+import com.example.drinkfoodapp.main.ui.mainscreen.MainViewModel
 import androidx.viewpager2.widget.ViewPager2
 import com.example.drinkfoodapp.R
 
-/**
- * Main Activity that hosts the ViewPager and Bottom Navigation for Drink and Food categories.
- */
 class MainActivity : AppCompatActivity() {
-
-    companion object {
-        private const val TAB_DRINK_POSITION = 0
-        private const val TAB_FOOD_POSITION = 1
-    }
     private val viewModel: MainViewModel by viewModels()
 
-    // Khởi tạo View Binding
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,13 +28,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setUpView() {
-        // Dùng apply để tránh lặp binding
         binding.apply {
-            // Thiết lập Adapter
             val adapter = ViewPagerAdapter(this@MainActivity)
             viewPager.adapter = adapter
 
-            // Kết nối BottomNav và ViewPager2
             bottomNav.setOnItemSelectedListener { item ->
                 val position = when (item.itemId) {
                     R.id.nav_drink -> TAB_DRINK_POSITION
@@ -60,12 +48,11 @@ class MainActivity : AppCompatActivity() {
                     bottomNav.menu.getItem(position).isChecked = true
 
                     // random khi chuyển tab
-                    val isDrinkSelected = position == TAB_DRINK_POSITION
-                    viewModel.randomizeSingleItem(isDrinkSelected)
+//                    val isDrinkSelected = position == TAB_DRINK_POSITION
+//                    viewModel.randomizeSingleItem(isDrinkSelected)
                 }
             })
 
-            // Xử lý sự kiện nút bấm điều hướng
             btnNext.setOnClickListener {
                 val isDrinkSelected = viewPager.currentItem == TAB_DRINK_POSITION
                 viewModel.nextItem(isDrinkSelected)
@@ -78,9 +65,15 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        // Random món ăn/đồ uống khi mở app lên
+    override fun onStart() {
+        super.onStart()
         viewModel.randomizeItems()
     }
+
+
+    companion object {
+        private const val TAB_DRINK_POSITION = 0
+        private const val TAB_FOOD_POSITION = 1
+    }
+
 }
