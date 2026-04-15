@@ -5,6 +5,10 @@
         android:icon="@drawable/coffee_24"
         android:title="@string/thuc_uong" />
     <item
+        android:id="@+id/nav_dummy"
+        android:enabled="false"
+        android:title="" />
+    <item
         android:id="@+id/nav_food"
         android:icon="@drawable/meal_24"
         android:title="@string/do_an" />

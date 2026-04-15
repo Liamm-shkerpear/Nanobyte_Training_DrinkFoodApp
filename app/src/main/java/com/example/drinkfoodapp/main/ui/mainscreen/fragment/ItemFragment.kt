@@ -6,9 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.drinkfoodapp.databinding.FragmentItemBinding
 import com.example.drinkfoodapp.main.model.MenuItem
 import com.example.drinkfoodapp.main.ui.mainscreen.MainViewModel
+import com.example.drinkfoodapp.main.ui.mainscreen.adapter.MenuAdapter
 
 class ItemFragment : Fragment() {
 
@@ -16,6 +18,7 @@ class ItemFragment : Fragment() {
     private val viewModel: MainViewModel by activityViewModels()
     private var _binding: FragmentItemBinding? = null
     private val binding get() = _binding!!
+    private lateinit var menuAdapter: MenuAdapter
 
 
     override fun onCreateView(
@@ -31,43 +34,23 @@ class ItemFragment : Fragment() {
 
         val isDrink = arguments?.getBoolean(ARG_IS_DRINK) ?: true
 
-        // Quan sát LiveData và update ui
+        //Config recyclerview
+        menuAdapter = MenuAdapter(emptyList())
+        binding.recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
+        binding.recyclerView.adapter = menuAdapter
+
+        // Quan sát live
         if (isDrink) {
-            viewModel.currentDrink.observe(viewLifecycleOwner) {
-                animateAndChangeData(it)
+            viewModel.drinkList.observe(viewLifecycleOwner) { list ->
+                menuAdapter.updateData(list)
             }
         } else {
-            viewModel.currentFood.observe(viewLifecycleOwner) {
-                animateAndChangeData(it)
+            viewModel.foodList.observe(viewLifecycleOwner) { list ->
+                menuAdapter.updateData(list)
             }
         }
-
-        // Handle reload button
-        binding.btnReload.setOnClickListener {
-            viewModel.randomizeItems()
-        }
     }
 
-    private fun animateAndChangeData(menuItem: MenuItem) {
-        binding.apply {
-            ivItemImage.animate().alpha(0f).scaleX(0.8f).scaleY(0.8f)
-                .setDuration(ANIMATION_DURATION).start()
-            tvItemName.animate().alpha(0f).scaleX(0.8f).scaleY(0.8f).setDuration(ANIMATION_DURATION)
-                .withEndAction {
-
-                    ivItemImage.setImageResource(menuItem.imageResId)
-                    tvItemName.text = menuItem.name
-
-                    ivItemImage.animate().alpha(1f).scaleX(1f).scaleY(1f)
-                        .setDuration(ANIMATION_DURATION)
-                        .start()
-                    tvItemName.animate().alpha(1f).scaleX(1f).scaleY(1f)
-                        .setDuration(ANIMATION_DURATION)
-                        .start()
-
-                }.start()
-        }
-    }
 
     override fun onDestroyView() {
         super.onDestroyView()
@@ -76,7 +59,6 @@ class ItemFragment : Fragment() {
 
     companion object {
         private const val ARG_IS_DRINK = "is_drink"
-        private const val ANIMATION_DURATION = 150L
 
         fun newInstance(isDrink: Boolean): ItemFragment {
             val fragment = ItemFragment()

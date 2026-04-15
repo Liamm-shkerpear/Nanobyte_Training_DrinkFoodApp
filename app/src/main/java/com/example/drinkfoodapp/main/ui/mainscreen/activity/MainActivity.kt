@@ -1,6 +1,7 @@
 package com.example.drinkfoodapp.main.ui.mainscreen.activity
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowInsetsControllerCompat
@@ -9,6 +10,7 @@ import com.example.drinkfoodapp.main.ui.mainscreen.adapter.ViewPagerAdapter
 import com.example.drinkfoodapp.main.ui.mainscreen.MainViewModel
 import androidx.viewpager2.widget.ViewPager2
 import com.example.drinkfoodapp.R
+import com.example.drinkfoodapp.main.ui.mainscreen.adapter.AddItemBottomSheet
 
 class MainActivity : AppCompatActivity() {
     private val viewModel: MainViewModel by viewModels()
@@ -45,35 +47,26 @@ class MainActivity : AppCompatActivity() {
             viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
                 override fun onPageSelected(position: Int) {
                     super.onPageSelected(position)
-                    bottomNav.menu.getItem(position).isChecked = true
+                    val menuIndex = if (position == TAB_DRINK_POSITION) 0 else 2
+                    bottomNav.menu.getItem(menuIndex).isChecked = true
 
-                    // random khi chuyển tab
-//                    val isDrinkSelected = position == TAB_DRINK_POSITION
-//                    viewModel.randomizeSingleItem(isDrinkSelected)
                 }
             })
 
-            btnNext.setOnClickListener {
-                val isDrinkSelected = viewPager.currentItem == TAB_DRINK_POSITION
-                viewModel.nextItem(isDrinkSelected)
+            fabCreate.setOnClickListener {
+               val bottomSheet = AddItemBottomSheet()
+                bottomSheet.show(supportFragmentManager, "AddItemBottomSheet")
             }
 
-            btnPrevious.setOnClickListener {
-                val isDrinkSelected = viewPager.currentItem == TAB_DRINK_POSITION
-                viewModel.previousItem(isDrinkSelected)
-            }
+            bottomNav.menu.getItem(1).isEnabled = false
+
         }
-    }
-
-    override fun onStart() {
-        super.onStart()
-        viewModel.randomizeItems()
     }
 
 
     companion object {
         private const val TAB_DRINK_POSITION = 0
-        private const val TAB_FOOD_POSITION = 1
+        private const val TAB_FOOD_POSITION = 2
     }
 
 }
