@@ -61,5 +61,35 @@ class MainViewModel : ViewModel() {
 
     }
 
+    fun deleteItem(item: MenuItem, isDrink: Boolean) {
+        if (isDrink) {
+            val currentList = _drinkList.value?.toMutableList() ?: mutableListOf()
+            currentList.remove(item)
+            _drinkList.value = currentList
+        } else {
+            val currentList = _foodList.value?.toMutableList() ?: mutableListOf()
+            currentList.remove(item)
+            _foodList.value = currentList
+        }
+    }
+
+    fun updateItem(oldItem: MenuItem, newName: String, isDrink: Boolean) {
+        if (isDrink) {
+            val currentList = _drinkList.value?.toMutableList() ?: mutableListOf()
+            val index = currentList.indexOf(oldItem)
+            if (index != -1) {
+                currentList[index] = oldItem.copy(name = newName)
+                _drinkList.value = currentList
+            } else {
+                val currentList = _foodList.value?.toMutableList() ?: mutableListOf()
+                val index = currentList.indexOf(oldItem)
+                if (index != -1) {
+                    currentList[index] = oldItem.copy(name = newName)
+                    _foodList.value = currentList
+                }
+            }
+        }
+
+    }
 }
 

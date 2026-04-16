@@ -10,7 +10,7 @@ import com.example.drinkfoodapp.main.ui.mainscreen.adapter.ViewPagerAdapter
 import com.example.drinkfoodapp.main.ui.mainscreen.MainViewModel
 import androidx.viewpager2.widget.ViewPager2
 import com.example.drinkfoodapp.R
-import com.example.drinkfoodapp.main.ui.mainscreen.fragment.AddFragment
+import com.example.drinkfoodapp.main.ui.mainscreen.fragment.AddItemBottomSheet
 
 class MainActivity : AppCompatActivity() {
     private val viewModel: MainViewModel by viewModels()
@@ -54,10 +54,9 @@ class MainActivity : AppCompatActivity() {
             })
 
             fabCreate.setOnClickListener {
-                supportFragmentManager.beginTransaction()
-                    .add(R.id.fragmentContainer, AddFragment())
-                    .addToBackStack(null)
-                    .commit()
+                val isDrinkSelected = binding.viewPager.currentItem == TAB_DRINK_POSITION
+                val bottomSheet = AddItemBottomSheet.newInstance(isDrinkSelected)
+                bottomSheet.show(supportFragmentManager, "AddBottomSheet")
             }
 
             bottomNav.menu.getItem(1).isEnabled = false

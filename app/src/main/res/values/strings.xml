@@ -7,4 +7,9 @@
     <string name="setting">Cài đặt</string>
     <string name="food_name">Tên món ăn</string>
     <string name="random">Random</string>
+    <string name="them_mon">Thêm món mới</string>
+    <string name="hint_nhap_mon">Nhập tên món ăn/thức uống...</string>
+    <string name="drink">Thức uống</string>
+    <string name="food">Đồ ăn</string>
+    <string name="add_item">Thêm món</string>
 </resources>

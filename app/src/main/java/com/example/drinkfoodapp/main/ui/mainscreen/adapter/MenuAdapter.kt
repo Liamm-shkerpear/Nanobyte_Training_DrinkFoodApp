@@ -6,25 +6,29 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.drinkfoodapp.R
+import com.example.drinkfoodapp.databinding.ItemMenuBinding
 import com.example.drinkfoodapp.main.model.MenuItem
 import com.google.android.material.imageview.ShapeableImageView
 
-class MenuAdapter(private var itemList: List<MenuItem>) :
+class MenuAdapter(
+    private var itemList: List<MenuItem>,
+    private val onEditClick: (MenuItem) -> Unit,
+    private val onDeleteClick: (MenuItem) -> Unit
+) :
     RecyclerView.Adapter<MenuAdapter.MenuViewHolder>() {
-    class MenuViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val ivThumb: ShapeableImageView = itemView.findViewById(R.id.ivThumb)
-        val tvName: TextView = itemView.findViewById(R.id.tvName)
-    }
+    class MenuViewHolder(val binding: ItemMenuBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MenuViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_menu, parent, false)
-        return MenuViewHolder(view)
+        val binding = ItemMenuBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return MenuViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: MenuViewHolder, position: Int) {
         val item = itemList[position]
-        holder.ivThumb.setImageResource(item.imageResId)
-        holder.tvName.text = item.name
+        holder.binding.ivThumb.setImageResource(item.imageResId)
+        holder.binding.tvName.text = item.name
+        holder.binding.btnEdit.setOnClickListener { onEditClick(item) }
+        holder.binding.btnDelete.setOnClickListener { onDeleteClick(item) }
     }
 
     override fun getItemCount(): Int {

@@ -1,9 +1,12 @@
 package com.example.drinkfoodapp.main.ui.mainscreen.fragment
 
+import android.app.AlertDialog
+import android.app.ProgressDialog.show
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
@@ -35,7 +38,28 @@ class ItemFragment : Fragment() {
         val isDrink = arguments?.getBoolean(ARG_IS_DRINK) ?: true
 
         //Config recyclerview
-        menuAdapter = MenuAdapter(emptyList())
+        menuAdapter = MenuAdapter(
+            itemList = emptyList(),
+            onEditClick = { item ->
+                val editText = android.widget.EditText(requireContext())
+                editText.setText(item.name)
+
+                AlertDialog.Builder(requireContext())
+                    .setTitle("Sửa tên món")
+                    .setView(editText)
+                    .setPositiveButton("Cập nhật") { _, _ ->
+                        val newName = editText.text.toString().trim()
+                        if (newName.isNotEmpty()) {
+                            viewModel.updateItem(item, newName, isDrink)
+                        }
+                    }
+                    .setNegativeButton("Hủy", null).show()
+            },
+            onDeleteClick = { item ->
+                viewModel.deleteItem(item, isDrink)
+                Toast.makeText(context, "Đã xóa món", Toast.LENGTH_SHORT).show()
+            }
+        )
         binding.recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
         binding.recyclerView.adapter = menuAdapter
 
