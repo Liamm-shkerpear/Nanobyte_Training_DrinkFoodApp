@@ -10,7 +10,7 @@ import com.example.drinkfoodapp.main.ui.mainscreen.adapter.ViewPagerAdapter
 import com.example.drinkfoodapp.main.ui.mainscreen.MainViewModel
 import androidx.viewpager2.widget.ViewPager2
 import com.example.drinkfoodapp.R
-import com.example.drinkfoodapp.main.ui.mainscreen.adapter.AddItemBottomSheet
+import com.example.drinkfoodapp.main.ui.mainscreen.fragment.AddFragment
 
 class MainActivity : AppCompatActivity() {
     private val viewModel: MainViewModel by viewModels()
@@ -54,8 +54,10 @@ class MainActivity : AppCompatActivity() {
             })
 
             fabCreate.setOnClickListener {
-               val bottomSheet = AddItemBottomSheet()
-                bottomSheet.show(supportFragmentManager, "AddItemBottomSheet")
+                supportFragmentManager.beginTransaction()
+                    .add(R.id.fragmentContainer, AddFragment())
+                    .addToBackStack(null)
+                    .commit()
             }
 
             bottomNav.menu.getItem(1).isEnabled = false
