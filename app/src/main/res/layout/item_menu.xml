@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?attr/selectableItemBackground"
     app:cardBackgroundColor="#FFFFFF"
     app:cardCornerRadius="20dp"
     app:cardElevation="2dp"
@@ -40,24 +43,13 @@
             app:layout_constraintTop_toBottomOf="@id/ivThumb" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="end">
 
-        <ImageView
-            android:id="@+id/btnEdit"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:src="@drawable/ic_edit"
-            android:padding="8dp"/>
-
-        <ImageView
-            android:id="@+id/btnDelete"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:src="@drawable/ic_delete"
-            android:padding="8dp"/>
-    </LinearLayout>
+    <ImageView
+        android:id="@+id/btnDelete"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_gravity="end"
+        android:padding="8dp"
+        android:src="@drawable/ic_delete"
+        tools:ignore="ContentDescription" />
 </com.google.android.material.card.MaterialCardView>

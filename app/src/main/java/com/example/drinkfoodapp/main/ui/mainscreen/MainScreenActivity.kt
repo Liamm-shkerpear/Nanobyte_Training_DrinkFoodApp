@@ -1,19 +1,16 @@
-package com.example.drinkfoodapp.main.ui.mainscreen.activity
+package com.example.drinkfoodapp.main.ui.mainscreen
 
 import android.os.Bundle
-import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowInsetsControllerCompat
-import com.example.drinkfoodapp.databinding.ActivityMainBinding
-import com.example.drinkfoodapp.main.ui.mainscreen.adapter.ViewPagerAdapter
-import com.example.drinkfoodapp.main.ui.mainscreen.MainViewModel
+import androidx.core.view.get
 import androidx.viewpager2.widget.ViewPager2
 import com.example.drinkfoodapp.R
-import com.example.drinkfoodapp.main.ui.mainscreen.fragment.AddItemBottomSheet
+import com.example.drinkfoodapp.databinding.ActivityMainBinding
+import com.example.drinkfoodapp.main.ui.mainscreen.adapter.ViewPagerAdapter
+import com.example.drinkfoodapp.main.ui.mainscreen.dialog.AddItemBottomSheet
 
 class MainActivity : AppCompatActivity() {
-    private val viewModel: MainViewModel by viewModels()
 
     private lateinit var binding: ActivityMainBinding
 
@@ -48,18 +45,18 @@ class MainActivity : AppCompatActivity() {
                 override fun onPageSelected(position: Int) {
                     super.onPageSelected(position)
                     val menuIndex = if (position == TAB_DRINK_POSITION) 0 else 2
-                    bottomNav.menu.getItem(menuIndex).isChecked = true
+                    bottomNav.menu[menuIndex].isChecked = true
 
                 }
             })
 
             fabCreate.setOnClickListener {
                 val isDrinkSelected = binding.viewPager.currentItem == TAB_DRINK_POSITION
-                val bottomSheet = AddItemBottomSheet.newInstance(isDrinkSelected)
+                val bottomSheet = AddItemBottomSheet.Companion.newInstance(isDrinkSelected)
                 bottomSheet.show(supportFragmentManager, "AddBottomSheet")
             }
 
-            bottomNav.menu.getItem(1).isEnabled = false
+            bottomNav.menu[1].isEnabled = false
 
         }
     }

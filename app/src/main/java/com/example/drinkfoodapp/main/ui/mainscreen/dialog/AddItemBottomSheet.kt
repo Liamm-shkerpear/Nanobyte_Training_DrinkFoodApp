@@ -1,18 +1,14 @@
-package com.example.drinkfoodapp.main.ui.mainscreen.fragment
+package com.example.drinkfoodapp.main.ui.mainscreen.dialog
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
-import com.example.drinkfoodapp.R
 import com.example.drinkfoodapp.databinding.LayoutAddItemBinding
 import com.example.drinkfoodapp.main.ui.mainscreen.MainViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.google.android.material.textfield.TextInputEditText
 
 class AddItemBottomSheet : BottomSheetDialogFragment() {
 
@@ -33,7 +29,10 @@ class AddItemBottomSheet : BottomSheetDialogFragment() {
 
         val isDrinkTab = arguments?.getBoolean(ARG_IS_DRINK) ?: true
 
+        handleAddItem(isDrinkTab)
+    }
 
+    private fun handleAddItem(isDrinkTab: Boolean) {
         binding.btnSave.setOnClickListener {
             val name = binding.edtFoodName.text.toString().trim()
             if (name.isEmpty()) {
@@ -43,12 +42,17 @@ class AddItemBottomSheet : BottomSheetDialogFragment() {
 
 
 
-            viewModel.addNewItem(name, isDrinkTab)
+            viewModel.addNewItem(name = name, isDrinkTab)
 
             Toast.makeText(context, "Đã thêm thành công!", Toast.LENGTH_SHORT).show()
 
             dismiss()
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     companion object {
