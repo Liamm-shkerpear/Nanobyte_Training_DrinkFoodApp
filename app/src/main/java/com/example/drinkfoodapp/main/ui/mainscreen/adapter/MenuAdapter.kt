@@ -35,7 +35,7 @@ class MenuAdapter(
 
     class MenuDiffCallback : DiffUtil.ItemCallback<MenuItem>() {
         override fun areItemsTheSame(oldItem: MenuItem, newItem: MenuItem): Boolean {
-            return oldItem.name == newItem.name
+            return oldItem.id == newItem.id
         }
 
         override fun areContentsTheSame(oldItem: MenuItem, newItem: MenuItem): Boolean {
