@@ -3,7 +3,8 @@ package com.example.drinkfoodapp.main.ui.mainscreen.adapter
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.example.drinkfoodapp.main.ui.mainscreen.fragment.ItemFragment
+import com.example.drinkfoodapp.main.ui.mainscreen.fragment.DrinkFragment
+import com.example.drinkfoodapp.main.ui.mainscreen.fragment.FoodFragment
 
 
 class ViewPagerAdapter(activity : AppCompatActivity) : FragmentStateAdapter(activity) {
@@ -11,10 +12,10 @@ class ViewPagerAdapter(activity : AppCompatActivity) : FragmentStateAdapter(acti
     override fun getItemCount(): Int = 2
 
     override fun createFragment(position: Int): Fragment {
-        return if (position == 0) {
-            ItemFragment.newInstance(isDrink = true)
-        } else {
-            ItemFragment.newInstance(isDrink = false)
+        return when (position) {
+            0 -> DrinkFragment()
+            1 -> FoodFragment()
+            else -> DrinkFragment()
         }
     }
 }

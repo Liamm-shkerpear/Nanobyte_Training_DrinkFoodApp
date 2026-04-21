@@ -12,4 +12,6 @@
     <string name="drink">Thức uống</string>
     <string name="food">Đồ ăn</string>
     <string name="add_item">Thêm món</string>
+    <string name="price">Nhập giá tiền</string>
+    <string name="desc">Nhập mô tả</string>
 </resources>

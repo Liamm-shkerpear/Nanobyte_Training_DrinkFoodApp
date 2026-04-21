@@ -34,18 +34,16 @@ class AddItemBottomSheet : BottomSheetDialogFragment() {
 
     private fun handleAddItem(isDrinkTab: Boolean) {
         binding.btnSave.setOnClickListener {
-            val name = binding.edtFoodName.text.toString().trim()
-            if (name.isEmpty()) {
+            val name = binding.edtName.text.toString().trim()
+            val priceStr = binding.edtPrice.text.toString().trim()
+            val description = binding.edtDescription.text.toString().trim()
+            if (name.isEmpty() || priceStr.isEmpty()) {
                 Toast.makeText(context, "Vui lòng nhập tên món!", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-
-
-
-            viewModel.addNewItem(name = name, isDrinkTab)
-
+            val price = priceStr.toIntOrNull()?: 0
+            viewModel.addNewItem(name = name, price = price, description = description, isDrink = isDrinkTab)
             Toast.makeText(context, "Đã thêm thành công!", Toast.LENGTH_SHORT).show()
-
             dismiss()
         }
     }
@@ -58,7 +56,7 @@ class AddItemBottomSheet : BottomSheetDialogFragment() {
     companion object {
         private const val ARG_IS_DRINK = "is_drink"
 
-        fun newInstance(isDrink: Boolean) : AddItemBottomSheet {
+        fun newInstance(isDrink: Boolean): AddItemBottomSheet {
             val bottomSheet = AddItemBottomSheet()
             val args = Bundle()
             args.putBoolean(ARG_IS_DRINK, isDrink)
