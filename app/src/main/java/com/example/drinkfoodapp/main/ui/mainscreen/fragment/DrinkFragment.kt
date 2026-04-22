@@ -2,16 +2,14 @@ package com.example.drinkfoodapp.main.ui.mainscreen.fragment
 
 import android.app.AlertDialog
 import android.os.Bundle
-import android.text.InputType
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
-import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.drinkfoodapp.databinding.DialogEditItemBinding
 import com.example.drinkfoodapp.databinding.FragmentDrinkBinding
 import com.example.drinkfoodapp.main.models.DrinkItem
 import com.example.drinkfoodapp.main.ui.mainscreen.MainViewModel
@@ -32,8 +30,7 @@ class DrinkFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         _binding = FragmentDrinkBinding.inflate(inflater, container, false)
         return binding.root
@@ -53,9 +50,9 @@ class DrinkFragment : Fragment() {
     }
 
     private fun initViewModel() {
-            viewModel.drinkItem.observe(viewLifecycleOwner) { list ->
-                menuAdapter.submitList(list)
-            }
+        viewModel.drinkItem.observe(viewLifecycleOwner) { list ->
+            menuAdapter.submitList(list)
+        }
         viewModel.selectedItem.observe(viewLifecycleOwner) { item ->
             if (item == null) {
                 menuAdapter.clearHighlight()
@@ -65,40 +62,26 @@ class DrinkFragment : Fragment() {
 
     private fun showEditDialog(item: Any) {
         if (item !is DrinkItem) return
-        val layout = LinearLayout(requireContext()).apply {
-            orientation = LinearLayout.VERTICAL
-            setPadding(50, 50, 50, 10)
-        }
-        val edtName = EditText(requireContext()).apply {
-            setText(item.name)
-            hint = "Tên món"
-        }
-        val edtPrice = EditText(requireContext()).apply {
-            setText(item.price.toString())
-            hint = "Giá tiền"
-            inputType = InputType.TYPE_CLASS_NUMBER
-        }
-        val edtDesc = EditText(requireContext()).apply {
-            setText(item.description)
-            hint = "Mô tả"
-        }
-        layout.addView(edtName)
-        layout.addView(edtPrice)
-        layout.addView(edtDesc)
+        val dialogBinding = DialogEditItemBinding.inflate(layoutInflater)
 
-        AlertDialog.Builder(requireContext())
-            .setTitle("Sửa tên món")
-            .setView(layout)
-            .setPositiveButton("Cập nhật") { _, _ ->
-                val newName = edtName.text.toString().trim()
-                val newPrice = edtPrice.text.toString().toIntOrNull() ?: 0
-                val newDesc = edtDesc.text.toString().trim()
+        dialogBinding.apply {
+            edtName.setText(item.name)
+            edtPrice.setText(item.price.toString())
+            edtDesc.setText(item.description)
 
-                if (newName.isNotEmpty()) {
-                    viewModel.updateItem(item, newName, newPrice, newDesc, isDrink = true)
+            AlertDialog.Builder(requireContext())
+                .setTitle("Sửa tên món")
+                .setView(dialogBinding.root)
+                .setPositiveButton("Cập nhật") { _, _ ->
+                    val newName = edtName.text.toString().trim()
+                    val newPrice = edtPrice.text.toString().toIntOrNull() ?: 0
+                    val newDesc = edtDesc.text.toString().trim()
+                    if (newName.isNotEmpty()) {
+                        viewModel.updateItem(item, newName, newPrice, newDesc, isDrink = true)
+                    }
                 }
-            }
-            .setNegativeButton("Hủy", null).show()
+                .setNegativeButton("Hủy", null).show()
+        }
     }
 
     private fun showDeleteNotification(item: Any) {

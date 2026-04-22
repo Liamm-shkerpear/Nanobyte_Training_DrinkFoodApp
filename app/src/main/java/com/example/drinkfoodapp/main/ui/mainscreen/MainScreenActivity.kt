@@ -1,5 +1,6 @@
 package com.example.drinkfoodapp.main.ui.mainscreen
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -61,7 +62,7 @@ class MainActivity : AppCompatActivity() {
 
             fabCreate.setOnClickListener {
                 val isDrinkSelected = binding.viewPager.currentItem == TAB_DRINK_POSITION
-                val bottomSheet = AddItemBottomSheet.Companion.newInstance(isDrinkSelected)
+                val bottomSheet = AddItemBottomSheet.newInstance(isDrinkSelected)
                 bottomSheet.show(supportFragmentManager, "AddBottomSheet")
             }
 
@@ -70,8 +71,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun observeViewModel() {
-        binding.tvPrice.visibility = View.VISIBLE
         viewModel.selectedItem.observe(this) { item ->
             if (item == null) {
                 binding.tvPrice.visibility = View.GONE

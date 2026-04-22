@@ -32,13 +32,11 @@ class MenuAdapter(
                     itemName = item.name
                     itemImage = item.imageResId
                 }
-
                 is FoodItem -> {
                     itemId = item.id
                     itemName = item.name
                     itemImage = item.imageResId
                 }
-
                 else -> return
             }
 
@@ -89,13 +87,16 @@ class MenuAdapter(
         if (payloads.isNotEmpty()) {
             for (payload in payloads) {
                 if (payload == PAYLOAD_SELECTION_CHANGED) {
-                    val currentItem = getItem(position)
-                    val itemId = if (currentItem is DrinkItem) {
-                        currentItem.id
-                    } else if (currentItem is FoodItem) {
-                        currentItem.id
-                    } else {
-                        return
+                    val itemId = when (val currentItem = getItem(position)) {
+                        is DrinkItem -> {
+                            currentItem.id
+                        }
+                        is FoodItem -> {
+                            currentItem.id
+                        }
+                        else -> {
+                            return
+                        }
                     }
                     holder.updateSelectionState(itemId)
                 }
@@ -135,7 +136,6 @@ class MenuAdapter(
                 else -> false
             }
         }
-
         currentSelectedId = -1
         if (oldPos != -1) notifyItemChanged(oldPos, PAYLOAD_SELECTION_CHANGED)
     }

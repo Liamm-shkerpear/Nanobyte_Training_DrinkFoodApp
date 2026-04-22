@@ -10,7 +10,7 @@ data class DrinkItem(
     val name: String,
     val price: Int,
     val description: String,
-    @DrawableRes
+    @get:DrawableRes
     val imageResId: Int
 
 ) : Parcelable

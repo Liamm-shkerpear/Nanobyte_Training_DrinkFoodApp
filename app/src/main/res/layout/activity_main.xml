@@ -51,10 +51,11 @@
         android:background="@drawable/bg_price_tag"
         android:paddingHorizontal="16dp"
         android:paddingVertical="8dp"
-        android:text="50.000đ"
+        android:text="@string/priceTv"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
         android:textStyle="bold"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@id/btnViewDetail"
         app:layout_constraintEnd_toEndOf="parent"
         tools:visibility="visible" />
@@ -65,7 +66,7 @@
         android:layout_height="56dp"
         android:layout_marginHorizontal="20dp"
         android:layout_marginBottom="12dp"
-        android:text="Xem chi tiết món"
+        android:text="@string/detailBtn"
         android:textAllCaps="false"
         android:textColor="#FFFFFF"
         android:textSize="16sp"
@@ -118,7 +119,6 @@
         app:shapeAppearanceOverlay="@style/CornerCut"
         app:tint="#FFFFFF"
         tools:ignore="ContentDescription" />
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

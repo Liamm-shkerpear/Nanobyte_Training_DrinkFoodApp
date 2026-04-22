@@ -14,4 +14,10 @@
     <string name="add_item">Thêm món</string>
     <string name="price">Nhập giá tiền</string>
     <string name="desc">Nhập mô tả</string>
+    <string name="nameEdit">Tên món</string>
+    <string name="priceEdit">Giá tiền</string>
+    <string name="descEdit">Mô tả</string>
+    <string name="detailBtn">Xem chi tiết món</string>
+    <string name="priceTv">50.000đ</string>
+    <string name="descDetail">Mô tả món ăn</string>
 </resources>
