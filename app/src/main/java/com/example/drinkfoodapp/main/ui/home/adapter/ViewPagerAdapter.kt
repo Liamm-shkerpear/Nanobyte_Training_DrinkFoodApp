@@ -1,11 +1,10 @@
-package com.example.drinkfoodapp.main.ui.mainscreen.adapter
+package com.example.drinkfoodapp.main.ui.home.adapter
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.example.drinkfoodapp.main.ui.mainscreen.fragment.DrinkFragment
-import com.example.drinkfoodapp.main.ui.mainscreen.fragment.FoodFragment
-
+import com.example.drinkfoodapp.main.ui.drink.DrinkFragment
+import com.example.drinkfoodapp.main.ui.food.FoodFragment
 
 class ViewPagerAdapter(activity : AppCompatActivity) : FragmentStateAdapter(activity) {
 

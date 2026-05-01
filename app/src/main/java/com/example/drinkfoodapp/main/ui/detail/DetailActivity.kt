@@ -1,5 +1,6 @@
-package com.example.drinkfoodapp.main.ui.mainscreen.activity
+package com.example.drinkfoodapp.main.ui.detail
 
+import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
 import android.widget.Toast
@@ -23,6 +24,7 @@ class DetailActivity : AppCompatActivity() {
         backToMain()
     }
 
+    @SuppressLint("SetTextI18n")
     private fun loadData() {
         val isDrink = intent.getBooleanExtra("IS_DRINK", true)
 
@@ -35,7 +37,7 @@ class DetailActivity : AppCompatActivity() {
             drinkItem?.run {
                 binding.ivDetailImage.setImageResource(imageResId)
                 binding.tvDetailName.text = name
-                binding.tvDetailPrice.text = "$price"
+                binding.tvDetailPrice.text = "${price}đ"
                 binding.tvDetailDesc.text = description
             } ?: showError()
         } else {
@@ -47,7 +49,7 @@ class DetailActivity : AppCompatActivity() {
             foodItem?.run {
                 binding.ivDetailImage.setImageResource(imageResId)
                 binding.tvDetailName.text = name
-                binding.tvDetailPrice.text = "$price"
+                binding.tvDetailPrice.text = "${price}đ"
                 binding.tvDetailDesc.text = description
             } ?: showError()
         }

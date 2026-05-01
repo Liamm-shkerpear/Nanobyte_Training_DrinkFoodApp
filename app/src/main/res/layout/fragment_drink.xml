@@ -11,5 +11,5 @@
         android:clipToPadding="false"
         android:paddingHorizontal="8dp"
         android:paddingTop="100dp"
-        android:paddingBottom="100dp" />
+        android:paddingBottom="160dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

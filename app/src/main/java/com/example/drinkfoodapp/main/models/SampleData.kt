@@ -7,7 +7,13 @@ object SampleData {
         return listOf(
             DrinkItem(
                 name = "Cà phê đá",
-                price = 12000,
+                price = 15000,
+                description = "Cà phê thơm ngon",
+                imageResId = R.drawable.capuchino
+            ),
+            DrinkItem(
+                name = "Cà phê đá",
+                price = 16000,
                 description = "Cà phê thơm ngon",
                 imageResId = R.drawable.capuchino
             ),
@@ -19,7 +25,7 @@ object SampleData {
             ),
             DrinkItem(
                 name = "Cà phê đá",
-                price = 12000,
+                price = 17000,
                 description = "Cà phê thơm ngon",
                 imageResId = R.drawable.capuchino
             ),
@@ -31,37 +37,31 @@ object SampleData {
             ),
             DrinkItem(
                 name = "Cà phê đá",
-                price = 12000,
+                price = 62000,
                 description = "Cà phê thơm ngon",
                 imageResId = R.drawable.capuchino
             ),
             DrinkItem(
                 name = "Cà phê đá",
-                price = 12000,
+                price = 18000,
                 description = "Cà phê thơm ngon",
                 imageResId = R.drawable.capuchino
             ),
             DrinkItem(
                 name = "Cà phê đá",
-                price = 12000,
+                price = 52000,
                 description = "Cà phê thơm ngon",
                 imageResId = R.drawable.capuchino
             ),
             DrinkItem(
                 name = "Cà phê đá",
-                price = 12000,
+                price = 52000,
                 description = "Cà phê thơm ngon",
                 imageResId = R.drawable.capuchino
             ),
             DrinkItem(
                 name = "Cà phê đá",
-                price = 12000,
-                description = "Cà phê thơm ngon",
-                imageResId = R.drawable.capuchino
-            ),
-            DrinkItem(
-                name = "Cà phê đá",
-                price = 12000,
+                price = 42000,
                 description = "Cà phê thơm ngon",
                 imageResId = R.drawable.capuchino
             ),
@@ -71,7 +71,7 @@ object SampleData {
         return listOf(
             FoodItem(
                 name = "Phở bò",
-                price = 15000,
+                price = 25000,
                 description = "Phở Hà Nội ngon",
                 imageResId = R.drawable.pho
             ),
@@ -83,49 +83,49 @@ object SampleData {
             ),
             FoodItem(
                 name = "Phở bò",
-                price = 15000,
+                price = 85000,
                 description = "Phở Hà Nội ngon",
                 imageResId = R.drawable.pho
             ),
             FoodItem(
                 name = "Phở bò",
-                price = 15000,
+                price = 65000,
                 description = "Phở Hà Nội ngon",
                 imageResId = R.drawable.pho
             ),
             FoodItem(
                 name = "Phở bò",
-                price = 15000,
+                price = 16000,
                 description = "Phở Hà Nội ngon",
                 imageResId = R.drawable.pho
             ),
             FoodItem(
                 name = "Phở bò",
-                price = 15000,
+                price = 145000,
                 description = "Phở Hà Nội ngon",
                 imageResId = R.drawable.pho
             ),
             FoodItem(
                 name = "Phở bò",
-                price = 15000,
+                price = 225000,
                 description = "Phở Hà Nội ngon",
                 imageResId = R.drawable.pho
             ),
             FoodItem(
                 name = "Phở bò",
-                price = 15000,
+                price = 445000,
                 description = "Phở Hà Nội ngon",
                 imageResId = R.drawable.pho
             ),
             FoodItem(
                 name = "Phở bò",
-                price = 15000,
+                price = 225000,
                 description = "Phở Hà Nội ngon",
                 imageResId = R.drawable.pho
             ),
             FoodItem(
                 name = "Phở bò",
-                price = 15000,
+                price = 19000,
                 description = "Phở Hà Nội ngon",
                 imageResId = R.drawable.pho
             ),

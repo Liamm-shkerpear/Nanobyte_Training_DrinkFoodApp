@@ -1,4 +1,4 @@
-package com.example.drinkfoodapp.main.ui.mainscreen.dialog
+package com.example.drinkfoodapp.main.utils.bottomsheet
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import com.example.drinkfoodapp.databinding.LayoutAddItemBinding
-import com.example.drinkfoodapp.main.ui.mainscreen.MainViewModel
+import com.example.drinkfoodapp.main.ui.home.MainViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class AddItemBottomSheet : BottomSheetDialogFragment() {
@@ -41,7 +41,7 @@ class AddItemBottomSheet : BottomSheetDialogFragment() {
                 Toast.makeText(context, "Vui lòng nhập tên món!", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            val price = priceStr.toIntOrNull()?: 0
+            val price = priceStr.toLongOrNull()?: 0
             viewModel.addNewItem(name = name, price = price, description = description, isDrink = isDrinkTab)
             Toast.makeText(context, "Đã thêm thành công!", Toast.LENGTH_SHORT).show()
             dismiss()

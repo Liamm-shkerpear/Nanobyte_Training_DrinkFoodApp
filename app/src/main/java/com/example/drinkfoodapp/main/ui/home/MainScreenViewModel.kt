@@ -1,4 +1,4 @@
-package com.example.drinkfoodapp.main.ui.mainscreen
+package com.example.drinkfoodapp.main.ui.home
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -17,7 +17,7 @@ class MainViewModel : ViewModel() {
     val foodItem: LiveData<List<FoodItem>> = _foodItem
 
 
-    fun addNewItem(name: String, price: Int, description: String, isDrink: Boolean) {
+    fun addNewItem(name: String, price: Long, description: String, isDrink: Boolean) {
         val defaultImage = if (isDrink) R.drawable.ca_fe else R.drawable.banh_mi
         if (isDrink) {
             val currentList = _drinkItem.value?.toMutableList() ?: mutableListOf()
@@ -60,7 +60,13 @@ class MainViewModel : ViewModel() {
         }
     }
 
-    fun updateItem(oldItem: Any, newName: String, newPrice: Int, newDescription: String, isDrink: Boolean) {
+    fun updateItem(
+        oldItem: Any,
+        newName: String,
+        newPrice: Long,
+        newDescription: String,
+        isDrink: Boolean
+    ) {
         when {
             isDrink && oldItem is DrinkItem -> {
                 val currentList = _drinkItem.value?.toMutableList() ?: mutableListOf()
@@ -91,22 +97,26 @@ class MainViewModel : ViewModel() {
         }
     }
 
-    fun clearSelection() {
-        _selectedItem.value = null
-    }
-
-    private val _selectedItem = MutableLiveData<Any?>(null)
-    val selectedItem: LiveData<Any?> = _selectedItem
-
-    fun selectItem(item: Any, isDrink: Boolean) {
-        when {
-            isDrink && item is DrinkItem -> {
-                _selectedItem.value = item
+    fun handleFavorite(item: Any) {
+        when (item) {
+            is DrinkItem -> {
+                val currentList = _drinkItem.value ?: return
+                val newList = currentList.map {
+                    if (it.id == item.id) it.copy(isFavorite = !it.isFavorite) else it
+                }
+                _drinkItem.value = newList
             }
 
-            !isDrink && item is FoodItem -> {
-                _selectedItem.value = item
+            is FoodItem -> {
+                val currentList = _foodItem.value ?: return
+                val newList = currentList.map {
+                    if (it.id == item.id) it.copy(isFavorite = !it.isFavorite) else it
+                }
+
+                _foodItem.value = newList
             }
         }
     }
 }
+
+

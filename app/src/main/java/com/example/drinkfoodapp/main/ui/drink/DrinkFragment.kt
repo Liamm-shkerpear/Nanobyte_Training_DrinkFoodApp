@@ -1,6 +1,7 @@
-package com.example.drinkfoodapp.main.ui.mainscreen.fragment
+package com.example.drinkfoodapp.main.ui.drink
 
 import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,8 +13,9 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.drinkfoodapp.databinding.DialogEditItemBinding
 import com.example.drinkfoodapp.databinding.FragmentDrinkBinding
 import com.example.drinkfoodapp.main.models.DrinkItem
-import com.example.drinkfoodapp.main.ui.mainscreen.MainViewModel
-import com.example.drinkfoodapp.main.ui.mainscreen.adapter.MenuAdapter
+import com.example.drinkfoodapp.main.ui.detail.DetailActivity
+import com.example.drinkfoodapp.main.ui.home.MainViewModel
+import com.example.drinkfoodapp.main.ui.drink.adapter.DrinkMenuAdapter
 
 class DrinkFragment : Fragment() {
 
@@ -22,10 +24,11 @@ class DrinkFragment : Fragment() {
     private var _binding: FragmentDrinkBinding? = null
     private val binding get() = _binding!!
     private val menuAdapter by lazy {
-        MenuAdapter(
+        DrinkMenuAdapter(
             onItemClick = ::itemClickHandle,
             onEditClick = ::showEditDialog,
-            onDeleteClick = ::showDeleteNotification
+            onDeleteClick = ::showDeleteNotification,
+            onFavoriteClick = ::showFavoriteNotification
         )
     }
 
@@ -53,15 +56,9 @@ class DrinkFragment : Fragment() {
         viewModel.drinkItem.observe(viewLifecycleOwner) { list ->
             menuAdapter.submitList(list)
         }
-        viewModel.selectedItem.observe(viewLifecycleOwner) { item ->
-            if (item == null) {
-                menuAdapter.clearHighlight()
-            }
-        }
     }
 
-    private fun showEditDialog(item: Any) {
-        if (item !is DrinkItem) return
+    private fun showEditDialog(item: DrinkItem) {
         val dialogBinding = DialogEditItemBinding.inflate(layoutInflater)
 
         dialogBinding.apply {
@@ -74,7 +71,7 @@ class DrinkFragment : Fragment() {
                 .setView(dialogBinding.root)
                 .setPositiveButton("Cập nhật") { _, _ ->
                     val newName = edtName.text.toString().trim()
-                    val newPrice = edtPrice.text.toString().toIntOrNull() ?: 0
+                    val newPrice = edtPrice.text.toString().toLongOrNull() ?: 0
                     val newDesc = edtDesc.text.toString().trim()
                     if (newName.isNotEmpty()) {
                         viewModel.updateItem(item, newName, newPrice, newDesc, isDrink = true)
@@ -84,30 +81,26 @@ class DrinkFragment : Fragment() {
         }
     }
 
-    private fun showDeleteNotification(item: Any) {
+    private fun showDeleteNotification(item: DrinkItem) {
         viewModel.deleteItem(item, isDrink = true)
         Toast.makeText(context, "Đã xóa món", Toast.LENGTH_SHORT).show()
     }
 
-    private fun itemClickHandle(item: Any) {
-        viewModel.selectItem(item, isDrink = true)
+    private fun itemClickHandle(item: DrinkItem) {
+        val intent = Intent(requireContext(), DetailActivity::class.java).apply {
+            putExtra("EXTRA_DRINK", item)
+            putExtra("IS_DRINK", true)
+        }
+        startActivity(intent)
+    }
+
+    private fun showFavoriteNotification(item: DrinkItem) {
+        viewModel.handleFavorite(item)
+        Toast.makeText(context, "Đã thêm vào danh sách yêu thích", Toast.LENGTH_SHORT).show()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-
-    companion object {
-        private const val ARG_IS_DRINK = "is_drink"
-
-        fun newInstance(isDrink: Boolean): DrinkFragment {
-            val fragment = DrinkFragment()
-            val args = Bundle()
-            args.putBoolean(ARG_IS_DRINK, isDrink)
-            fragment.arguments = args
-            return fragment
-        }
-    }
-
 }

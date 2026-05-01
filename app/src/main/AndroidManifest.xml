@@ -12,10 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DrinkFoodApp">
         <activity
-            android:name=".main.ui.mainscreen.activity.DetailActivity"
+            android:name=".main.ui.detail.DetailActivity"
             android:exported="false" />
         <activity
-            android:name=".main.ui.mainscreen.MainActivity"
+            android:name=".main.ui.home.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

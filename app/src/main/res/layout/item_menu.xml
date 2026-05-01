@@ -29,11 +29,44 @@
             app:layout_constraintTop_toTopOf="parent"
             app:shapeAppearanceOverlay="@style/CornerCut" />
 
+        <ImageView
+            android:id="@+id/btnEdit"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:padding="8dp"
+            android:src="@drawable/ic_edit"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:id="@+id/btnDelete"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:padding="8dp"
+            android:src="@drawable/ic_delete"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:id="@+id/btnFavorite"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginEnd="6dp"
+            android:layout_marginBottom="6dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:padding="4dp"
+            android:src="@drawable/ic_favorite_border"
+            app:layout_constraintBottom_toBottomOf="@id/ivThumb"
+            app:layout_constraintEnd_toEndOf="@id/ivThumb"
+            tools:ignore="ContentDescription" />
+
         <TextView
             android:id="@+id/tvName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="12dp"
             android:textAlignment="center"
             android:textColor="#212121"
             android:textSize="16sp"
@@ -42,33 +75,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/ivThumb" />
 
-        <ImageView
-            android:id="@+id/btnEdit"
-            android:layout_width="42dp"
-            android:layout_height="42dp"
-            android:padding="8dp"
-            android:src="@drawable/ic_edit"
-            tools:ignore="ContentDescription"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
-
-
-        <ImageView
-            android:id="@+id/btnDelete"
-            android:layout_width="42dp"
-            android:layout_height="42dp"
-            android:padding="8dp"
-            android:src="@drawable/ic_delete"
-            tools:ignore="ContentDescription"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-
-
-
 
 </com.google.android.material.card.MaterialCardView>

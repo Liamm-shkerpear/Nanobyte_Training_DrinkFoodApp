@@ -8,10 +8,10 @@ import kotlinx.parcelize.Parcelize
 data class DrinkItem(
     val id: Int = IdGenerator.nextId(),
     val name: String,
-    val price: Int,
+    val price: Long,
     val description: String,
     @get:DrawableRes
-    val imageResId: Int
-
+    val imageResId: Int,
+    val isFavorite: Boolean = false
 ) : Parcelable
 
