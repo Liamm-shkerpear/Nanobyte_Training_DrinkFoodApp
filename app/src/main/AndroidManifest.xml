@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DrinkFoodApp">
         <activity
+            android:name=".main.ui.wishlist.WishlistActivity"
+            android:exported="false" />
+        <activity
             android:name=".main.ui.detail.DetailActivity"
             android:exported="false" />
         <activity

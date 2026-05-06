@@ -7,4 +7,9 @@
         android:title="@string/setting"
         app:showAsAction="never" />
 
+    <item
+        android:id="@+id/action_wishlist"
+        android:title="@string/wishlist"
+        app:showAsAction="never"/>
+
 </menu>

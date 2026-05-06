@@ -6,13 +6,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
+import com.example.drinkfoodapp.R
 import com.example.drinkfoodapp.databinding.LayoutAddItemBinding
-import com.example.drinkfoodapp.main.ui.home.MainViewModel
+import com.example.drinkfoodapp.main.data.domain.entities.MenuItem
+import com.example.drinkfoodapp.main.di.Injection
+import com.example.drinkfoodapp.main.di.ViewModelFactory
+import com.example.drinkfoodapp.main.ui.home.HomeScreenViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class AddItemBottomSheet : BottomSheetDialogFragment() {
 
-    private val viewModel: MainViewModel by activityViewModels()
+    private val viewModel: HomeScreenViewModel by activityViewModels {
+        ViewModelFactory(Injection.provideMenuRepository(requireContext()))
+    }
     private var _binding: LayoutAddItemBinding? = null
     private val binding get() = _binding!!
 
@@ -42,7 +48,17 @@ class AddItemBottomSheet : BottomSheetDialogFragment() {
                 return@setOnClickListener
             }
             val price = priceStr.toLongOrNull()?: 0
-            viewModel.addNewItem(name = name, price = price, description = description, isDrink = isDrinkTab)
+            val categoryStr = if (isDrinkTab) "DRINK" else "FOOD"
+            val defaultImage = if (isDrinkTab) R.drawable.ca_fe else R.drawable.banh_mi
+            val newItem = MenuItem(
+                name = name,
+                price = price,
+                description = description,
+                category = categoryStr,
+                isFavorite = false,
+                imageResId = defaultImage
+            )
+            viewModel.saveNewItem(newItem)
             Toast.makeText(context, "Đã thêm thành công!", Toast.LENGTH_SHORT).show()
             dismiss()
         }

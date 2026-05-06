@@ -1,133 +1,154 @@
-package com.example.drinkfoodapp.main.models
+package com.example.drinkfoodapp.main.data.domain.entities
 
 import com.example.drinkfoodapp.R
 
+
 object SampleData {
-    fun getDrinkItems(): List<DrinkItem> {
+    fun getDrinkItems(): List<MenuItem> {
         return listOf(
-            DrinkItem(
+            MenuItem(
                 name = "Cà phê đá",
                 price = 15000,
                 description = "Cà phê thơm ngon",
-                imageResId = R.drawable.capuchino
+                imageResId = R.drawable.capuchino,
+                category = "DRINK"
             ),
-            DrinkItem(
+            MenuItem(
                 name = "Cà phê đá",
                 price = 16000,
                 description = "Cà phê thơm ngon",
-                imageResId = R.drawable.capuchino
+                imageResId = R.drawable.capuchino,
+                category = "DRINK"
             ),
-            DrinkItem(
+            MenuItem(
                 name = "Cà phê đá",
                 price = 12000,
                 description = "Cà phê thơm ngon",
-                imageResId = R.drawable.capuchino
+                imageResId = R.drawable.capuchino,
+                category = "DRINK"
             ),
-            DrinkItem(
+            MenuItem(
                 name = "Cà phê đá",
                 price = 17000,
                 description = "Cà phê thơm ngon",
-                imageResId = R.drawable.capuchino
+                imageResId = R.drawable.capuchino,
+                category = "DRINK"
             ),
-            DrinkItem(
+            MenuItem(
                 name = "Cà phê đá",
                 price = 12000,
                 description = "Cà phê thơm ngon",
-                imageResId = R.drawable.capuchino
+                imageResId = R.drawable.capuchino,
+                category = "DRINK"
             ),
-            DrinkItem(
+            MenuItem(
                 name = "Cà phê đá",
                 price = 62000,
                 description = "Cà phê thơm ngon",
-                imageResId = R.drawable.capuchino
+                imageResId = R.drawable.capuchino,
+                category = "DRINK"
             ),
-            DrinkItem(
+            MenuItem(
                 name = "Cà phê đá",
                 price = 18000,
                 description = "Cà phê thơm ngon",
-                imageResId = R.drawable.capuchino
+                imageResId = R.drawable.capuchino,
+                category = "DRINK"
             ),
-            DrinkItem(
+            MenuItem(
                 name = "Cà phê đá",
                 price = 52000,
                 description = "Cà phê thơm ngon",
-                imageResId = R.drawable.capuchino
+                imageResId = R.drawable.capuchino,
+                category = "DRINK"
             ),
-            DrinkItem(
+            MenuItem(
                 name = "Cà phê đá",
                 price = 52000,
                 description = "Cà phê thơm ngon",
-                imageResId = R.drawable.capuchino
+                imageResId = R.drawable.capuchino,
+                category = "DRINK"
             ),
-            DrinkItem(
+            MenuItem(
                 name = "Cà phê đá",
                 price = 42000,
                 description = "Cà phê thơm ngon",
-                imageResId = R.drawable.capuchino
+                imageResId = R.drawable.capuchino,
+                category = "DRINK"
             ),
         )
     }
-    fun getFoodItems(): List<FoodItem> {
+    fun getFoodItems(): List<MenuItem> {
         return listOf(
-            FoodItem(
+            MenuItem(
                 name = "Phở bò",
                 price = 25000,
                 description = "Phở Hà Nội ngon",
-                imageResId = R.drawable.pho
+                imageResId = R.drawable.pho,
+                category = "FOOD"
             ),
-            FoodItem(
+            MenuItem(
                 name = "Phở bò",
                 price = 15000,
                 description = "Phở Hà Nội ngon",
-                imageResId = R.drawable.pho
+                imageResId = R.drawable.pho,
+                category = "FOOD"
             ),
-            FoodItem(
+            MenuItem(
                 name = "Phở bò",
                 price = 85000,
                 description = "Phở Hà Nội ngon",
-                imageResId = R.drawable.pho
+                imageResId = R.drawable.pho,
+                category = "FOOD"
             ),
-            FoodItem(
+            MenuItem(
                 name = "Phở bò",
                 price = 65000,
                 description = "Phở Hà Nội ngon",
-                imageResId = R.drawable.pho
+                imageResId = R.drawable.pho,
+                category = "FOOD"
             ),
-            FoodItem(
+            MenuItem(
                 name = "Phở bò",
                 price = 16000,
                 description = "Phở Hà Nội ngon",
-                imageResId = R.drawable.pho
+                imageResId = R.drawable.pho,
+                category = "FOOD"
             ),
-            FoodItem(
+            MenuItem(
                 name = "Phở bò",
                 price = 145000,
                 description = "Phở Hà Nội ngon",
-                imageResId = R.drawable.pho
+                imageResId = R.drawable.pho,
+                category = "FOOD"
             ),
-            FoodItem(
+            MenuItem(
                 name = "Phở bò",
                 price = 225000,
                 description = "Phở Hà Nội ngon",
-                imageResId = R.drawable.pho
+                imageResId = R.drawable.pho,
+                category = "FOOD"
             ),
-            FoodItem(
+            MenuItem(
                 name = "Phở bò",
                 price = 445000,
                 description = "Phở Hà Nội ngon",
-                imageResId = R.drawable.pho
+                imageResId = R.drawable.pho,
+                category = "FOOD"
             ),
-            FoodItem(
+            MenuItem(
                 name = "Phở bò",
                 price = 225000,
                 description = "Phở Hà Nội ngon",
-                imageResId = R.drawable.pho
+                imageResId = R.drawable.pho,
+                category = "FOOD"
             ),
-            FoodItem(
+            MenuItem(
                 name = "Phở bò",
                 price = 19000,
                 description = "Phở Hà Nội ngon",
-                imageResId = R.drawable.pho
+                imageResId = R.drawable.pho,
+                category = "FOOD"
             ),
         )
     }

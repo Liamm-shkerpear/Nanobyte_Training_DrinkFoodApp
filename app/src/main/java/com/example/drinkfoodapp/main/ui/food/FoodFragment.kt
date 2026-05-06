@@ -12,15 +12,19 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.drinkfoodapp.databinding.DialogEditItemBinding
 import com.example.drinkfoodapp.databinding.FragmentFoodBinding
-import com.example.drinkfoodapp.main.models.FoodItem
+import com.example.drinkfoodapp.main.data.domain.entities.MenuItem
+import com.example.drinkfoodapp.main.di.Injection
+import com.example.drinkfoodapp.main.di.ViewModelFactory
 import com.example.drinkfoodapp.main.ui.detail.DetailActivity
-import com.example.drinkfoodapp.main.ui.home.MainViewModel
 import com.example.drinkfoodapp.main.ui.food.adapter.FoodMenuAdapter
+import com.example.drinkfoodapp.main.ui.home.HomeScreenViewModel
 
 class FoodFragment : Fragment() {
 
 
-    private val viewModel: MainViewModel by activityViewModels()
+    private val viewModel: HomeScreenViewModel by activityViewModels {
+        ViewModelFactory(Injection.provideMenuRepository(requireContext()))
+    }
     private var _binding: FragmentFoodBinding? = null
     private val binding get() = _binding!!
     private val menuAdapter by lazy {
@@ -28,7 +32,7 @@ class FoodFragment : Fragment() {
             onItemClick = ::itemClickHandle,
             onEditClick = ::showEditDialog,
             onDeleteClick = ::showDeleteNotification,
-            onFavoriteClick = viewModel::handleFavorite
+            onFavoriteClick = ::showFavoriteNotification
         )
     }
 
@@ -54,12 +58,12 @@ class FoodFragment : Fragment() {
     }
 
     private fun initViewModel() {
-        viewModel.foodItem.observe(viewLifecycleOwner) { list ->
+        viewModel.foodItems.observe(viewLifecycleOwner) { list ->
             menuAdapter.submitList(list)
         }
     }
 
-    private fun showEditDialog(item: FoodItem) {
+    private fun showEditDialog(item: MenuItem) {
         val dialogBinding = DialogEditItemBinding.inflate(layoutInflater)
 
         dialogBinding.apply {
@@ -76,24 +80,29 @@ class FoodFragment : Fragment() {
                     val newDesc = edtDesc.text.toString().trim()
 
                     if (newName.isNotEmpty()) {
-                        viewModel.updateItem(item, newName, newPrice, newDesc, isDrink = false)
+                        val updateItem = item.copy(name = newName, price = newPrice, description = newDesc)
+                        viewModel.saveNewItem(updateItem)
                     }
                 }
                 .setNegativeButton("Hủy", null).show()
         }
     }
 
-    private fun showDeleteNotification(item: FoodItem) {
-        viewModel.deleteItem(item, isDrink = false)
+    private fun showDeleteNotification(item: MenuItem) {
+        viewModel.deleteItem(item)
         Toast.makeText(context, "Đã xóa món", Toast.LENGTH_SHORT).show()
     }
 
-    private fun itemClickHandle(item: FoodItem) {
+    private fun itemClickHandle(item: MenuItem) {
         val intent = Intent(requireContext(), DetailActivity::class.java).apply {
-            putExtra("EXTRA_FOOD", item)
-            putExtra("IS_DRINK", false)
+            putExtra("EXTRA_MENU_ITEM", item)
         }
         startActivity(intent)
+    }
+
+    private fun showFavoriteNotification(item: MenuItem) {
+        viewModel.handleFavorite(item)
+        Toast.makeText(context, "Đã thêm vào danh sách yêu thích", Toast.LENGTH_SHORT).show()
     }
 
     override fun onDestroyView() {

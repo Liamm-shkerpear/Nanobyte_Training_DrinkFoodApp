@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     id("kotlin-parcelize")
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -51,4 +52,12 @@ dependencies {
     implementation("androidx.viewpager2:viewpager2:1.1.0")
     implementation("androidx.fragment:fragment-ktx:1.6.2")
     implementation("androidx.activity:activity-ktx:1.8.2")
+    val room_version = "2.8.4"
+    implementation("androidx.room:room-runtime:$room_version")
+    // LiveData
+    val lifecycle_version = "2.10.0"
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:${lifecycle_version}")
+    ksp("androidx.room:room-compiler:$room_version")
+    implementation("androidx.room:room-ktx:$room_version")
+
 }

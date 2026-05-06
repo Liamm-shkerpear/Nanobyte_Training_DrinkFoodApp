@@ -8,19 +8,19 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.drinkfoodapp.R
 import com.example.drinkfoodapp.databinding.ItemMenuBinding
-import com.example.drinkfoodapp.main.models.FoodItem
+import com.example.drinkfoodapp.main.data.domain.entities.MenuItem
 
 class FoodMenuAdapter(
-    private val onItemClick: (FoodItem) -> Unit,
-    private val onEditClick: (FoodItem) -> Unit,
-    private val onDeleteClick: (FoodItem) -> Unit,
-    private val onFavoriteClick: (FoodItem) -> Unit
-) : ListAdapter<FoodItem, FoodMenuAdapter.FoodViewHolder>(FoodDiffCallback()) {
+    private val onItemClick: (MenuItem) -> Unit,
+    private val onEditClick: (MenuItem) -> Unit,
+    private val onDeleteClick: (MenuItem) -> Unit,
+    private val onFavoriteClick: (MenuItem) -> Unit
+) : ListAdapter<MenuItem, FoodMenuAdapter.FoodViewHolder>(FoodDiffCallback()) {
 
     inner class FoodViewHolder(val binding: ItemMenuBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: FoodItem) {
+        fun bind(item: MenuItem) {
             binding.ivThumb.setImageResource(item.imageResId)
             binding.tvName.text = item.name
 
@@ -75,15 +75,15 @@ class FoodMenuAdapter(
         }
     }
 
-    class FoodDiffCallback : DiffUtil.ItemCallback<FoodItem>() {
-        override fun areItemsTheSame(oldItem: FoodItem, newItem: FoodItem) =
+    class FoodDiffCallback : DiffUtil.ItemCallback<MenuItem>() {
+        override fun areItemsTheSame(oldItem: MenuItem, newItem: MenuItem) =
             oldItem.id == newItem.id
 
-        override fun areContentsTheSame(oldItem: FoodItem, newItem: FoodItem): Boolean {
+        override fun areContentsTheSame(oldItem: MenuItem, newItem: MenuItem): Boolean {
             return oldItem == newItem
         }
 
-        override fun getChangePayload(oldItem: FoodItem, newItem: FoodItem): Any? {
+        override fun getChangePayload(oldItem: MenuItem, newItem: MenuItem): Any? {
             if (oldItem.isFavorite != newItem.isFavorite) {
                 return PAYLOAD_FAVORITE
             }

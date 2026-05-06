@@ -7,8 +7,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowInsetsControllerCompat
 import com.example.drinkfoodapp.databinding.ActivityDetailBinding
-import com.example.drinkfoodapp.main.models.DrinkItem
-import com.example.drinkfoodapp.main.models.FoodItem
+import com.example.drinkfoodapp.main.data.domain.entities.MenuItem
 
 @Suppress("DEPRECATION")
 class DetailActivity : AppCompatActivity() {
@@ -26,33 +25,18 @@ class DetailActivity : AppCompatActivity() {
 
     @SuppressLint("SetTextI18n")
     private fun loadData() {
-        val isDrink = intent.getBooleanExtra("IS_DRINK", true)
-
-        if (isDrink) {
-            val drinkItem = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                intent.getParcelableExtra("EXTRA_DRINK", DrinkItem::class.java)
-            } else {
-                intent.getParcelableExtra("EXTRA_DRINK")
-            }
-            drinkItem?.run {
-                binding.ivDetailImage.setImageResource(imageResId)
-                binding.tvDetailName.text = name
-                binding.tvDetailPrice.text = "${price}đ"
-                binding.tvDetailDesc.text = description
-            } ?: showError()
+        val menuItem = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            intent.getParcelableExtra("EXTRA_MENU_ITEM", MenuItem::class.java)
         } else {
-            val foodItem = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                intent.getParcelableExtra("EXTRA_FOOD", FoodItem::class.java)
-            } else {
-                intent.getParcelableExtra("EXTRA_FOOD")
-            }
-            foodItem?.run {
-                binding.ivDetailImage.setImageResource(imageResId)
-                binding.tvDetailName.text = name
-                binding.tvDetailPrice.text = "${price}đ"
-                binding.tvDetailDesc.text = description
-            } ?: showError()
+            @Suppress("DEPRECATION")
+            intent.getParcelableExtra("EXTRA_MENU_ITEM")
         }
+        menuItem?.run {
+            binding.ivDetailImage.setImageResource(imageResId)
+            binding.tvDetailName.text = name
+            binding.tvDetailPrice.text = "${price}đ"
+            binding.tvDetailDesc.text = description
+        } ?: showError()
     }
 
     private fun showError() {
@@ -66,3 +50,6 @@ class DetailActivity : AppCompatActivity() {
         }
     }
 }
+
+
+

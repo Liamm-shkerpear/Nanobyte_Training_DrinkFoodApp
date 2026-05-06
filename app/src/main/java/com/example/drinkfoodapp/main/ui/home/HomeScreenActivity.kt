@@ -1,7 +1,7 @@
 package com.example.drinkfoodapp.main.ui.home
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.core.view.get
@@ -9,13 +9,14 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.drinkfoodapp.R
 import com.example.drinkfoodapp.databinding.ActivityMainBinding
 import com.example.drinkfoodapp.main.ui.home.adapter.ViewPagerAdapter
+import com.example.drinkfoodapp.main.ui.wishlist.WishlistActivity
 import com.example.drinkfoodapp.main.utils.bottomsheet.AddItemBottomSheet
 
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private val viewModel: MainViewModel by viewModels()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,6 +28,7 @@ class MainActivity : AppCompatActivity() {
         WindowInsetsControllerCompat(window, window.decorView).isAppearanceLightStatusBars = true
 
         setUpView()
+        setupAppBar()
     }
 
     private fun setUpView() {
@@ -58,10 +60,22 @@ class MainActivity : AppCompatActivity() {
             }
 
             bottomNav.menu[1].isEnabled = false
-
         }
     }
 
+    private fun setupAppBar() {
+        binding.topAppBar.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.action_wishlist -> {
+                    val intent = Intent(this@MainActivity, WishlistActivity::class.java)
+                    startActivity(intent)
+                    true
+                }
+
+                else -> false
+            }
+        }
+    }
 
 
     companion object {
