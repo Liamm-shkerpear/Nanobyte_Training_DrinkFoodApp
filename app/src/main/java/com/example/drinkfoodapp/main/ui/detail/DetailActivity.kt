@@ -1,13 +1,14 @@
 package com.example.drinkfoodapp.main.ui.detail
 
-import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowInsetsControllerCompat
+import com.example.drinkfoodapp.R
 import com.example.drinkfoodapp.databinding.ActivityDetailBinding
 import com.example.drinkfoodapp.main.data.domain.entities.MenuItem
+import com.example.drinkfoodapp.main.utils.AppConstants
 
 @Suppress("DEPRECATION")
 class DetailActivity : AppCompatActivity() {
@@ -23,18 +24,17 @@ class DetailActivity : AppCompatActivity() {
         backToMain()
     }
 
-    @SuppressLint("SetTextI18n")
     private fun loadData() {
         val menuItem = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            intent.getParcelableExtra("EXTRA_MENU_ITEM", MenuItem::class.java)
+            intent.getParcelableExtra(AppConstants.EXTRA_MENU_ITEM, MenuItem::class.java)
         } else {
             @Suppress("DEPRECATION")
-            intent.getParcelableExtra("EXTRA_MENU_ITEM")
+            intent.getParcelableExtra(AppConstants.EXTRA_MENU_ITEM)
         }
         menuItem?.run {
             binding.ivDetailImage.setImageResource(imageResId)
             binding.tvDetailName.text = name
-            binding.tvDetailPrice.text = "${price}đ"
+            binding.tvDetailPrice.text = getString(R.string.item_price, price)
             binding.tvDetailDesc.text = description
         } ?: showError()
     }

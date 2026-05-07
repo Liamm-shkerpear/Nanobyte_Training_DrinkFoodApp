@@ -27,11 +27,11 @@ class MainActivity : AppCompatActivity() {
         // Set status bar icons to dark
         WindowInsetsControllerCompat(window, window.decorView).isAppearanceLightStatusBars = true
 
-        setUpView()
-        setupAppBar()
+        initView()
+        initTopAppBar()
     }
 
-    private fun setUpView() {
+    private fun initView() {
         binding.apply {
             viewPager.adapter = ViewPagerAdapter(this@MainActivity)
 
@@ -63,7 +63,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun setupAppBar() {
+    private fun initTopAppBar() {
         binding.topAppBar.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.action_wishlist -> {
@@ -71,7 +71,6 @@ class MainActivity : AppCompatActivity() {
                     startActivity(intent)
                     true
                 }
-
                 else -> false
             }
         }

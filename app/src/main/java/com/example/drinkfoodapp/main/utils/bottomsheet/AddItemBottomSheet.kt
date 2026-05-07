@@ -12,6 +12,7 @@ import com.example.drinkfoodapp.main.data.domain.entities.MenuItem
 import com.example.drinkfoodapp.main.di.Injection
 import com.example.drinkfoodapp.main.di.ViewModelFactory
 import com.example.drinkfoodapp.main.ui.home.HomeScreenViewModel
+import com.example.drinkfoodapp.main.utils.AppConstants
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class AddItemBottomSheet : BottomSheetDialogFragment() {
@@ -48,7 +49,7 @@ class AddItemBottomSheet : BottomSheetDialogFragment() {
                 return@setOnClickListener
             }
             val price = priceStr.toLongOrNull()?: 0
-            val categoryStr = if (isDrinkTab) "DRINK" else "FOOD"
+            val categoryStr = if (isDrinkTab) AppConstants.DRINK else AppConstants.FOOD
             val defaultImage = if (isDrinkTab) R.drawable.ca_fe else R.drawable.banh_mi
             val newItem = MenuItem(
                 name = name,

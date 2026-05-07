@@ -11,6 +11,6 @@ class ViewModelFactory(private val repository: MenuRepository) : ViewModelProvid
         if (modelClass.isAssignableFrom(HomeScreenViewModel::class.java)) {
             return HomeScreenViewModel(repository) as T
         }
-        throw IllegalArgumentException("Unknown viewmodel class")
+        throw IllegalArgumentException("Unknown viewmodel class: ${modelClass.name}")
     }
 }

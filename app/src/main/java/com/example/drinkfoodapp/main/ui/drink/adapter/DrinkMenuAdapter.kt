@@ -1,6 +1,5 @@
 package com.example.drinkfoodapp.main.ui.drink.adapter
 
-import android.annotation.SuppressLint
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -20,11 +19,11 @@ class DrinkMenuAdapter(
 
     inner class DrinkViewHolder(val binding: ItemMenuBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        @SuppressLint("SetTextI18n")
         fun bind(item: MenuItem) {
             binding.ivThumb.setImageResource(item.imageResId)
             binding.tvName.text = item.name
-            binding.tvItemPrice.text = "${item.price}đ"
+            binding.tvItemPrice.text =
+                binding.root.context.getString(R.string.item_price, item.price)
 
             updateFavoriteState(item.isFavorite)
 
