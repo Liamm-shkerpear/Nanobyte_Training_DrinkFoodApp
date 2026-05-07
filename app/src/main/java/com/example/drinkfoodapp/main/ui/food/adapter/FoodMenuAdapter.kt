@@ -1,5 +1,6 @@
 package com.example.drinkfoodapp.main.ui.food.adapter
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.drinkfoodapp.R
 import com.example.drinkfoodapp.databinding.ItemMenuBinding
 import com.example.drinkfoodapp.main.data.domain.entities.MenuItem
+import com.example.drinkfoodapp.main.ui.drink.adapter.DrinkMenuAdapter.DrinkViewHolder
 
 class FoodMenuAdapter(
     private val onItemClick: (MenuItem) -> Unit,
@@ -20,32 +22,18 @@ class FoodMenuAdapter(
     inner class FoodViewHolder(val binding: ItemMenuBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
+        @SuppressLint("SetTextI18n")
         fun bind(item: MenuItem) {
             binding.ivThumb.setImageResource(item.imageResId)
             binding.tvName.text = item.name
+            binding.tvItemPrice.text = "${item.price}đ"
 
             updateFavoriteState(item.isFavorite)
 
-            binding.root.setOnClickListener {
-                if (bindingAdapterPosition != RecyclerView.NO_POSITION) {
-                    onItemClick(getItem(bindingAdapterPosition))
-                }
-            }
-            binding.btnEdit.setOnClickListener {
-                if (bindingAdapterPosition != RecyclerView.NO_POSITION) {
-                    onEditClick(getItem(bindingAdapterPosition))
-                }
-            }
-            binding.btnDelete.setOnClickListener {
-                if (bindingAdapterPosition != RecyclerView.NO_POSITION) {
-                    onDeleteClick(getItem(bindingAdapterPosition))
-                }
-            }
-            binding.btnFavorite.setOnClickListener {
-                if (bindingAdapterPosition != RecyclerView.NO_POSITION) {
-                    onFavoriteClick(getItem(bindingAdapterPosition))
-                }
-            }
+            binding.root.setOnClickListener { onItemClick(item) }
+            binding.btnEdit.setOnClickListener { onEditClick(item) }
+            binding.btnDelete.setOnClickListener { onDeleteClick(item) }
+            binding.btnFavorite.setOnClickListener { onFavoriteClick(item) }
         }
 
         fun updateFavoriteState(isFavorite: Boolean) {
@@ -67,11 +55,13 @@ class FoodMenuAdapter(
     }
 
     override fun onBindViewHolder(holder: FoodViewHolder, position: Int, payloads: List<Any?>) {
-        if (payloads.contains(PAYLOAD_FAVORITE)) {
-            val item = getItem(position)
-            holder.updateFavoriteState(item.isFavorite)
+        if (payloads.isEmpty()) {
+            holder.bind(getItem(position))
         } else {
-            super.onBindViewHolder(holder, position, payloads)
+            val payload = payloads[0]
+            if (payload == true) {
+                holder.bind(getItem(position))
+            }
         }
     }
 
@@ -83,15 +73,12 @@ class FoodMenuAdapter(
             return oldItem == newItem
         }
 
-        override fun getChangePayload(oldItem: MenuItem, newItem: MenuItem): Any? {
-            if (oldItem.isFavorite != newItem.isFavorite) {
-                return PAYLOAD_FAVORITE
-            }
-            return super.getChangePayload(oldItem, newItem)
+        override fun getChangePayload(oldItem: MenuItem, newItem: MenuItem): Boolean {
+            return oldItem.isFavorite != newItem.isFavorite
+                    || oldItem.name != newItem.name
+                    || oldItem.price != newItem.price
+                    || oldItem.description != newItem.description
+                    || oldItem.category != newItem.category
         }
-    }
-
-    companion object {
-        private const val PAYLOAD_FAVORITE = "PAYLOAD_FAVORITE"
     }
 }

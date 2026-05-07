@@ -60,7 +60,6 @@ class DrinkFragment : Fragment() {
     private fun initViewModel() {
         viewModel.drinkItems.observe(viewLifecycleOwner) { list ->
             menuAdapter.submitList(list)
-            Log.d("CHECKKKRoom", "Fragment nhận được danh sách: ${list.size} món")
         }
     }
 

@@ -21,4 +21,8 @@
     <string name="priceTv">50.000đ</string>
     <string name="descDetail">Mô tả món ăn</string>
     <string name="wishlist">Wishlist</string>
+    <string name="all">All</string>
+    <string name="chip_food">Food</string>
+    <string name="chip_drink">Drink</string>
+    <string name="wishlist_title">Danh sách yêu thích</string>
 </resources>

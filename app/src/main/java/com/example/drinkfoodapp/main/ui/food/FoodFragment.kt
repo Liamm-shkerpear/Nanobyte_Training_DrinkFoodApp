@@ -80,7 +80,8 @@ class FoodFragment : Fragment() {
                     val newDesc = edtDesc.text.toString().trim()
 
                     if (newName.isNotEmpty()) {
-                        val updateItem = item.copy(name = newName, price = newPrice, description = newDesc)
+                        val updateItem =
+                            item.copy(name = newName, price = newPrice, description = newDesc)
                         viewModel.saveNewItem(updateItem)
                     }
                 }
