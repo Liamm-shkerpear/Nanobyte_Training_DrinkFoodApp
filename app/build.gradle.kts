@@ -59,5 +59,13 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:${lifecycle_version}")
     ksp("androidx.room:room-compiler:$room_version")
     implementation("androidx.room:room-ktx:$room_version")
-
+    // Retrofit
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    // Okhttp
+    implementation(platform("com.squareup.okhttp3:okhttp-bom:5.3.0"))
+    implementation("com.squareup.okhttp3:okhttp")
+    implementation("com.squareup.okhttp3:logging-interceptor")
+    // Glide
+    implementation("com.github.bumptech.glide:glide:5.0.5")
 }

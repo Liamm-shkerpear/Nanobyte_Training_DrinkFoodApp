@@ -12,6 +12,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DrinkFoodApp">
         <activity
+            android:name=".main.ui.collection.CollectionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".main.ui.winedetails.WineDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".main.ui.wine.WineScreenActivity"
+            android:exported="false" />
+        <activity
             android:name=".main.ui.wishlist.WishlistActivity"
             android:exported="false" />
         <activity
@@ -26,6 +35,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

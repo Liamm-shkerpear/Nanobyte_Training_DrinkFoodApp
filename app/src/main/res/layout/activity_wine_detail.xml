@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F2F2ED">
+
+    <ImageView
+        android:id="@+id/ivDetailImage"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/backgrounds/scenic"
+        tools:ignore="ContentDescription" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/btnBack"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_margin="20dp"
+        app:cardBackgroundColor="#CCFFFFFF"
+        app:cardCornerRadius="24dp"
+        app:cardElevation="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:strokeWidth="0dp">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_back"
+            app:tint="#2C3539"
+            tools:ignore="ContentDescription" />
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="-40dp"
+        app:cardBackgroundColor="#FFFFFF"
+        app:shapeAppearanceOverlay="@style/UpperCornerRounded"
+        app:cardElevation="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivDetailImage"
+        app:strokeWidth="0dp">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            android:clipToPadding="false"
+            android:paddingBottom="100dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingHorizontal="24dp"
+                android:paddingTop="32dp"
+                android:paddingBottom="24dp">
+
+                <TextView
+                    android:id="@+id/tvDetailTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunito"
+                    android:textColor="#1A1A1A"
+                    android:textSize="28sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Emporda 2012" />
+
+                <TextView
+                    android:id="@+id/tvDetailWinery"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:fontFamily="@font/nunito"
+                    android:textColor="#666666"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvDetailTitle"
+                    tools:text="Maselva" />
+
+                <LinearLayout
+                    android:id="@+id/layoutRatingBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvDetailWinery">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_rating_badge"
+                        android:paddingHorizontal="10dp"
+                        android:paddingVertical="4dp">
+
+                        <TextView
+                            android:id="@+id/tvDetailAverage"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/nunito"
+                            android:textColor="#FFD700"
+                            android:textStyle="bold"
+                            tools:text="★ 4.9" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tvDetailReviews"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:fontFamily="@font/nunito"
+                        android:textColor="#9E9E9E"
+                        android:textSize="14sp"
+                        tools:text="(88 ratings)" />
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="24dp"
+                    android:background="#E0E0E0"
+                    app:layout_constraintTop_toBottomOf="@id/layoutRatingBox" />
+
+                <TextView
+                    android:id="@+id/tvOriginTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:fontFamily="@font/nunito"
+                    android:text="Origin:"
+                    android:textColor="#2C3539"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/divider" />
+
+                <TextView
+                    android:id="@+id/tvDetailLocation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="@font/nunito"
+                    android:lineSpacingExtra="6dp"
+                    android:textColor="#616161"
+                    android:textSize="16sp"
+                    app:layout_constraintTop_toBottomOf="@id/tvOriginTitle"
+                    tools:text="Spain\n·\nEmpordà" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

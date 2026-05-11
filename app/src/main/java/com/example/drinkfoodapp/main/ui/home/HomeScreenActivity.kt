@@ -9,8 +9,10 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.drinkfoodapp.R
 import com.example.drinkfoodapp.databinding.ActivityMainBinding
 import com.example.drinkfoodapp.main.ui.home.adapter.ViewPagerAdapter
+import com.example.drinkfoodapp.main.ui.wine.WineScreenActivity
 import com.example.drinkfoodapp.main.ui.wishlist.WishlistActivity
 import com.example.drinkfoodapp.main.utils.bottomsheet.AddItemBottomSheet
+import kotlin.jvm.java
 
 
 class MainActivity : AppCompatActivity() {
@@ -71,6 +73,13 @@ class MainActivity : AppCompatActivity() {
                     startActivity(intent)
                     true
                 }
+
+                R.id.action_wine -> {
+                    val intent = Intent(this@MainActivity, WineScreenActivity::class.java)
+                    startActivity(intent)
+                    true
+                }
+
                 else -> false
             }
         }

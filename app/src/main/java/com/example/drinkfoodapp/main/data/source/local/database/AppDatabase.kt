@@ -6,15 +6,18 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.drinkfoodapp.main.data.domain.entities.MenuItem
+import com.example.drinkfoodapp.main.data.domain.entities.WineItem
 import com.example.drinkfoodapp.main.data.domain.entities.SampleData
 import com.example.drinkfoodapp.main.data.source.local.dao.MenuDao
+import com.example.drinkfoodapp.main.data.source.local.dao.WineDao
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-@Database(entities = [MenuItem::class], version = 1, exportSchema = false)
+@Database(entities = [MenuItem::class, WineItem::class], version = 3, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun menuDao(): MenuDao
+    abstract fun wineDao(): WineDao
 
     companion object {
         @Volatile
@@ -25,7 +28,7 @@ abstract class AppDatabase : RoomDatabase() {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     AppDatabase::class.java,
-                    "Menu Database"
+                    "App Database"
                 )
                     .addCallback(object : Callback() {
                         override fun onCreate(db: SupportSQLiteDatabase) {
