@@ -12,6 +12,7 @@ object Injection {
         val database = AppDatabase.getDatabase(context)
         return MenuRepositoryImpl(database.menuDao())
     }
+
     fun provideWineRepository(context: Context): WineRepository {
         val database = AppDatabase.getDatabase(context)
         return WineRepositoryImpl(database.wineDao())

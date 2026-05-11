@@ -138,7 +138,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
                     android:fontFamily="@font/nunito"
-                    android:text="Origin:"
+                    android:text="@string/origin"
                     android:textColor="#2C3539"
                     android:textSize="18sp"
                     android:textStyle="bold"

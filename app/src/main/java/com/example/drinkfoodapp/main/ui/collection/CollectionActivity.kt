@@ -25,6 +25,7 @@ class CollectionActivity : AppCompatActivity() {
             onItemClick = ::itemClickHandle,
             onAddClick = { item -> wineViewModel.addCollection(item) })
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCollectionBinding.inflate(layoutInflater)
@@ -34,6 +35,7 @@ class CollectionActivity : AppCompatActivity() {
         observeViewModel()
         onBtnBackClick()
     }
+
     private fun itemClickHandle(item: WineItem) {
         val intent = Intent(this@CollectionActivity, WineDetailActivity::class.java).apply {
             putExtra(AppConstants.EXTRA_WINE, item)

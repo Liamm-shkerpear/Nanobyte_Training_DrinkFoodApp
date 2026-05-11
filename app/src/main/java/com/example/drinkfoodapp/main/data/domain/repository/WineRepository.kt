@@ -1,8 +1,6 @@
 package com.example.drinkfoodapp.main.data.domain.repository
 
 import com.example.drinkfoodapp.main.data.domain.entities.WineItem
-import com.example.drinkfoodapp.main.data.source.local.dao.WineDao
-import com.example.drinkfoodapp.main.data.source.remote.ApiConfig
 import kotlinx.coroutines.flow.Flow
 
 interface WineRepository {

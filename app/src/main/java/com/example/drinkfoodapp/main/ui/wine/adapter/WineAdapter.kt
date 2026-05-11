@@ -1,6 +1,5 @@
 package com.example.drinkfoodapp.main.ui.wine.adapter
 
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -37,6 +36,7 @@ class WineAdapter(
             binding.btnAdd.setOnClickListener { onAddClick(item) }
         }
     }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WineViewHolder {
         val binding = ItemWineBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return WineViewHolder(binding)

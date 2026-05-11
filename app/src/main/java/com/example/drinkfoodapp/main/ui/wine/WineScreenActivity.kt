@@ -108,6 +108,7 @@ class WineScreenActivity : AppCompatActivity() {
                     startActivity(intent)
                     true
                 }
+
                 else -> false
             }
         }
