@@ -21,7 +21,7 @@ class DetailActivity : AppCompatActivity() {
         WindowInsetsControllerCompat(window, window.decorView).isAppearanceLightStatusBars = true
 
         loadData()
-        backToMain()
+        onBtnBackClick()
     }
 
     private fun loadData() {
@@ -44,7 +44,7 @@ class DetailActivity : AppCompatActivity() {
         finish()
     }
 
-    private fun backToMain() {
+    private fun onBtnBackClick() {
         binding.btnBack.setOnClickListener {
             finish()
         }

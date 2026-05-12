@@ -5,21 +5,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.activityViewModels
 import com.example.drinkfoodapp.R
 import com.example.drinkfoodapp.databinding.LayoutAddItemBinding
 import com.example.drinkfoodapp.main.data.domain.entities.MenuItem
-import com.example.drinkfoodapp.main.di.Injection
-import com.example.drinkfoodapp.main.di.ViewModelFactory
 import com.example.drinkfoodapp.main.ui.home.HomeScreenViewModel
 import com.example.drinkfoodapp.main.utils.AppConstants
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import org.koin.androidx.viewmodel.ext.android.activityViewModel
 
 class AddItemBottomSheet : BottomSheetDialogFragment() {
 
-    private val viewModel: HomeScreenViewModel by activityViewModels {
-        ViewModelFactory(Injection.provideMenuRepository(requireContext()))
-    }
+    private val viewModel: HomeScreenViewModel by activityViewModel()
     private var _binding: LayoutAddItemBinding? = null
     private val binding get() = _binding!!
 

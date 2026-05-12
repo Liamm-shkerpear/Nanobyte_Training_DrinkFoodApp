@@ -2,25 +2,22 @@ package com.example.drinkfoodapp.main.ui.wishlist
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.asLiveData
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.drinkfoodapp.databinding.ActivityWishlistBinding
 import com.example.drinkfoodapp.main.data.domain.entities.MenuItem
-import com.example.drinkfoodapp.main.di.Injection
-import com.example.drinkfoodapp.main.di.ViewModelFactory
 import com.example.drinkfoodapp.main.ui.detail.DetailActivity
 import com.example.drinkfoodapp.main.ui.drink.adapter.DrinkMenuAdapter
 import com.example.drinkfoodapp.main.ui.home.HomeScreenViewModel
 import com.example.drinkfoodapp.main.utils.AppConstants
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import kotlin.getValue
 import kotlin.jvm.java
 
 class WishlistActivity : AppCompatActivity() {
     private lateinit var binding: ActivityWishlistBinding
-    private val viewModel: HomeScreenViewModel by viewModels {
-        ViewModelFactory(Injection.provideMenuRepository(this))
-    }
+    private val viewModel: HomeScreenViewModel by viewModel()
     private val adapter = DrinkMenuAdapter(
         onFavoriteClick = { item ->
             viewModel.handleFavorite(item)

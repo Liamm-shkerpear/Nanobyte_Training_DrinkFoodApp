@@ -8,25 +8,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.asLiveData
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.drinkfoodapp.databinding.DialogEditItemBinding
 import com.example.drinkfoodapp.databinding.FragmentDrinkBinding
 import com.example.drinkfoodapp.main.data.domain.entities.MenuItem
-import com.example.drinkfoodapp.main.di.Injection
-import com.example.drinkfoodapp.main.di.ViewModelFactory
 import com.example.drinkfoodapp.main.ui.detail.DetailActivity
 import com.example.drinkfoodapp.main.ui.drink.adapter.DrinkMenuAdapter
 import com.example.drinkfoodapp.main.ui.home.HomeScreenViewModel
 import com.example.drinkfoodapp.main.utils.AppConstants
+import org.koin.androidx.viewmodel.ext.android.activityViewModel
 
 class DrinkFragment : Fragment() {
-
-
-    private val viewModel: HomeScreenViewModel by activityViewModels {
-        ViewModelFactory(Injection.provideMenuRepository(requireContext()))
-    }
+    private val viewModel: HomeScreenViewModel by activityViewModel()
     private var _binding: FragmentDrinkBinding? = null
     private val binding get() = _binding!!
     private val menuAdapter by lazy {
@@ -79,7 +73,8 @@ class DrinkFragment : Fragment() {
                     val newPrice = edtPrice.text.toString().toLongOrNull() ?: 0
                     val newDesc = edtDesc.text.toString().trim()
                     if (newName.isNotEmpty()) {
-                        val updateItem = item.copy(name = newName, price = newPrice, description = newDesc)
+                        val updateItem =
+                            item.copy(name = newName, price = newPrice, description = newDesc)
                         viewModel.saveNewItem(updateItem)
                     }
                 }

@@ -1,6 +1,7 @@
 package com.example.drinkfoodapp.main.ui.wine.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -13,7 +14,8 @@ import com.example.drinkfoodapp.main.data.domain.entities.WineItem
 
 class WineAdapter(
     private val onItemClick: (WineItem) -> Unit,
-    private val onAddClick: (WineItem) -> Unit
+    private val onAddClick: (WineItem) -> Unit,
+    private val isCollectionMode: Boolean = false
 ) : ListAdapter<WineItem, WineAdapter.WineViewHolder>(WineDiffCallback()) {
     inner class WineViewHolder(val binding: ItemWineBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -31,6 +33,10 @@ class WineAdapter(
             } else {
                 binding.btnAdd.setImageResource(R.drawable.ic_add_wine)
             }
+
+            binding.btnAdd.visibility =
+                if (isCollectionMode || !item.isSaved) View.VISIBLE
+                else View.INVISIBLE
 
             binding.root.setOnClickListener { onItemClick(item) }
             binding.btnAdd.setOnClickListener { onAddClick(item) }

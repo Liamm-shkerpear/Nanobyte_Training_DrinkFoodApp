@@ -15,9 +15,6 @@ interface WineDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertWines(wines: List<WineItem>)
 
-    @Query("SELECT * FROM wines WHERE id = :wineId")
-    suspend fun getWineById(wineId: Int): WineItem
-
     @Query("SELECT * FROM wines WHERE is_saved = 1")
     fun getCollection(): Flow<List<WineItem>>
 

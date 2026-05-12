@@ -31,14 +31,14 @@ class WineDetailActivity : AppCompatActivity() {
             intent.getParcelableExtra(AppConstants.EXTRA_WINE)
         }
         wineItem?.run {
-            binding.tvDetailTitle.text = wineItem.wine ?: "Unknow wine"
-            binding.tvDetailWinery.text = wineItem.winery ?: "Unknow winery"
+            binding.tvDetailTitle.text = this.wine ?: "Unknow wine"
+            binding.tvDetailWinery.text = this.winery ?: "Unknow winery"
             binding.tvDetailLocation.text =
-                getString(R.string.originWine, wineItem.location ?: "Unknow location")
+                getString(R.string.originWine, this.location ?: "Unknow location")
             binding.tvDetailAverage.text =
-                getString(R.string.rating_star, wineItem.rating?.average ?: "N/A")
+                getString(R.string.rating_star, this.rating?.average ?: "N/A")
             binding.tvDetailReviews.text =
-                getString(R.string.wine_reviews, wineItem.rating?.reviews ?: "0 rating")
+                getString(R.string.wine_reviews, this.rating?.reviews ?: "0 rating")
             Glide.with(this@WineDetailActivity)
                 .load(wineItem.image)
                 .centerCrop()
